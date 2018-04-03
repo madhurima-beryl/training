@@ -1,0 +1,26 @@
+			RUBY
+
+
+Designed by		:	Yukihiro Matsumoto(JAPAN)
+
+First appeared		:	1995; 23 years ago
+Stable release		:	2.5.1 (March 28, 2018)
+(latest)
+
+Filename extensions	:	.rb
+
+-------------------------------------------------------------
+RUBY INSTALLATION
+
+$ sudo apt-get install ruby-full
+
+To see the version:- ruby -v
+
+ruby 2.3.1p112 (2016-04-26 revision 54768) [i686-linux]
+
+------------------------------------------------------------
+
+Interactive Ruby
+
+
+

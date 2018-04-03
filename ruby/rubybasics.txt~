@@ -1,0 +1,99 @@
+			RUBY
+
+
+Designed by		:	Yukihiro "Matz" Matsumoto(JAPAN)
+
+First appeared		:	1995; 23 years ago
+Stable release		:	2.5.1 (March 28, 2018)
+(latest)
+
+Filename extensions	:	.rb
+
+-------------------------------------------------------------
+FEATURES
+
+Ruby language has many features. Some of them are explained below:
+
+1. open-source
+2. interpreted programming language
+3. Object-oriented	:	Each and every value is an object. Every object has a class and every class has a super class
+4. Flexibility		:	you can easily remove, redefine or add existing parts to it
+
+5. Mixins		:	single inheritance only. Ruby has classes as well as modules. A module has methods but no instances. Instead,
+				a module can be mixed into a class, which adds the method of that module to the class. It is similar to
+				inheritance but much more flexible.
+
+6. Visual appearance
+Dynamic typing and Duck typing
+Exception handling
+Garbage collector
+Portable
+Keywords
+Statement delimiters
+Variable constants
+Naming conventions
+Keyword arguments
+Method names
+Singleton methods
+Missing method
+Case Sensitive
+-------------------------------------------------------------
+RUBY INSTALLATION
+
+$ sudo apt-get install ruby-full
+
+To see the version:- ruby -v
+
+ruby 2.3.1p112 (2016-04-26 revision 54768) [i686-linux]
+
+------------------------------------------------------------
+
+INTERACTIVE RUBY
+
+In shell type :  $irb  
+
+2.3.1 :001 > "hello world"
+ => "hello world" 
+
+2.3.1 :002 > puts "hello world"
+hello world
+ => nil
+
+puts 		:	basic command to print something out in Ruby
+=> nil		:	the result of the expression
+puts always returns nil, which is Ruby’s absolutely-positively-nothing value.
+
+
+*****DEFINING METHODS************
+
+def func(name= "madhu")
+2.3.1 :007?>   puts "hello #{name}"
+2.3.1 :008?>   end
+ => :func 
+2.3.1 :009 > func
+hello madhu
+ => nil 
+
+If the name isn’t supplied, use the default name of "madhu"
+*****Module example**************
+
+ Math.sqrt(9)
+ => 3.0 
+
+Math		:	a built-in module for mathematics.
+Dot(.)		:	how you identify the receiver of a message.
+sqrt(9)		:	a message which means call the method sqrt, shorthand for “square root” with the parameter of 9.
+=>3.0		:	result of this method call is the value 3.0 ( sqrt() always returns a floating-point number)
+ Math also contains methods like sin() and tan().
+
+ a= 3**2
+ => 9 
+ b= 4**3
+ => 64 
+ Math.sqrt(a+b)
+ => 8.54400374531753 
+
+
+ Modules serve two roles in Ruby.
+1.  grouping similar methods together under a familiar name
+2.  

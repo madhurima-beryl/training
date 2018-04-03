@@ -1,0 +1,264 @@
+			DATABASE ASSIGNMENT-- FLIGHT INFORMATION MANAGEMENT
+
+flight_information=# \d
+
+           List of relations
+ Schema |   Name    | Type  |  Owner   
+--------+-----------+-------+----------
+ public | aircraft  | table | postgres
+ public | certified | table | postgres
+ public | employees | table | postgres
+ public | flights   | table | postgres
+(4 rows)
+
+ select * from flights;
+ flno | depart_from |  arrive_at  | distance | departs  | arrives  | price 
+------+-------------+-------------+----------+----------+----------+-------
+  101 | los angeles | honolulu    |    54000 | 10:00:00 | 14:00:00 | 45000
+  102 | madison     | los angeles |    26000 | 12:00:00 | 15:30:00 | 15000
+  103 | madison     | honolulu    |    17000 | 08:00:00 | 12:45:00 | 15000
+  104 | new york    | los angeles |    40000 | 22:00:00 | 02:56:00 | 34000
+  105 | new york    | honolulu    |    27000 | 23:25:00 | 04:14:00 | 23000
+  106 | madison     | new york    |    19000 | 15:45:00 | 18:35:00 | 12000
+  107 | los angeles | madison     |    24000 | 13:00:00 | 16:00:00 | 21000
+  108 | los angeles | chicago     |    62000 | 00:00:00 | 05:30:00 | 50000
+  109 | honolulu    | new york    |    15000 | 13:00:00 | 15:30:00 | 13500
+(9 rows)
+
+
+
+
+ select * from aircraft;
+ aid |   aname    | cruising_range 
+-----+------------+----------------
+   2 | helicopter |           2500
+   3 | airbus     |           5000
+   4 | boeing 747 |           7200
+   6 | airbus 20  |           6300
+   1 | boeing     |          90000
+   5 | lockheed   |          67000
+(6 rows)
+
+
+ select * from certified;
+ eid | aid 
+-----+-----
+ 304 |   1
+ 302 |   4
+ 303 |   2
+ 304 |   4
+ 301 |   3
+ 304 |   5
+ 304 |   6
+(7 rows)
+
+
+ select * from employees;
+ eid |    ename     | salary 
+-----+--------------+--------
+ 305 | chhaya       |  75000
+ 302 | vinay mehta  |  72000
+ 303 | tarun garg   |  63000
+ 301 | suraj sharma |  33500
+ 304 | madhurima    | 102000
+ 306 | kalika       |  90000
+(6 rows)
+
+ 306 | kalika       |  58000
+
+(6 rows)
+
+
+
+---------------Questions--------------
+
+
+Q a.	Find the names of aircraft such that all pilots certified to operate them earn more than $80,000. 
+
+ select distinct aname from aircraft inner join certified on aircraft.aid= certified.aid where eid in (select eid from employees where salary>80000);
+
+   aname    
+------------
+ boeing 747
+ airbus 20
+ lockheed
+ boeing
+(4 rows)
+
+
+
+Q b. For each pilot who is certified for more than three aircraft, find the eid and the maximum cruisingrange of the aircraft for which she or he is certified. 
+
+ select eid, max(cruising_range) from aircraft inner join certified on aircraft.aid = certified.aid group by eid having count(eid)>3 ;
+
+ eid |  max  
+-----+-------
+ 304 | 90000
+(1 row)
+
+
+
+Q c. Find the names of pilots whose salary is less than the price of the cheapest route from Los Angeles to Honolulu. 
+
+ select ename from employees where salary<( select min(price) from flights where depart_from='los angeles' and arrive_at = 'honolulu');
+
+    ename     
+--------------
+ suraj sharma
+(1 row)
+
+
+
+Q d. For all aircraft with cruisingrange over 1000 miles, find the name of the aircraft and the average salary of all pilots certified for this aircraft. 
+
+  select aname, avg(salary) from aircraft a,employees e, certified c where a.aid=c.aid and e.eid= c. eid and cruising_range>1000 group by aname; 
+
+   aname    |         avg         
+------------+---------------------
+ boeing 747 |  87000.000000000000
+ airbus 20  | 102000.000000000000
+ helicopter |  63000.000000000000
+ boeing     | 102000.000000000000
+ lockheed   | 102000.000000000000
+ airbus     |  33500.000000000000
+(6 rows)
+
+
+
+Q e. Find the names of pilots certified for some Boeing aircraft. 
+
+ select distinct ename from employees inner join certified on employees.eid= certified.eid where aid in (select aid from aircraft where aname like 'boeing%');
+
+    ename    
+-------------
+ vinay mehta
+ madhurima
+(2 rows)
+
+
+
+Q f. Find the aids of all aircraft that can be used on routes from Los Angeles to Chicago.
+
+ select aid from aircraft where cruising_range>(select distance from flights where depart_from='los angeles' and arrive_at='chicago'); 
+
+ aid 
+-----
+   1
+   5
+(2 rows)
+
+
+
+Q g. Identify the routes that can be piloted by every pilot who makes more than $100,000. 
+
+ select depart_from, arrive_at from flights where exists (select e.eid from employees e, certified c where e.eid=c.eid and e.salary>100000);
+ depart_from |  arrive_at  
+-------------+-------------
+ los angeles | honolulu
+ madison     | los angeles
+ madison     | honolulu
+ new york    | los angeles
+ new york    | honolulu
+ madison     | new york
+ los angeles | madison
+ los angeles | chicago
+ honolulu    | new york
+(9 rows)
+
+
+Q h. Print the enames of pilots who can operate planes with cruisingrange greater than 3000 miles but are not certified on any Boeing aircraft. 
+
+  select ename from employees where eid in (select c.eid from certified c where exists(select a1.aid from aircraft a1 where a1.aid=c.aid and cruising_range >3000) and not exists(select a2.aid from aircraft a2 where a2.aid = c.aid and a2.aname like 'boeing%'));
+    ename     
+--------------
+ suraj sharma
+ madhurima
+(2 rows)
+
+
+
+Q i. A customer wants to travel from Madison to New York with no more than two changes of flight. List the choice of departure times from Madison if the customer wants to arrive in New York by 7 p.m. 
+
+ select departs from flights where depart_from='madison' and arrive_at = 'new york' and arrives<'19:00'
+ union (select f0.departs from flights f0, flights f1 where f0.depart_from= 'madison' and f0.arrive_at!='new york' and f0.arrive_at=f1.depart_from and f1.arrive_at='new york' and f1.arrives<'19:00')
+union (select f0.departs from flights f0, flights f1, flights f2 where f0.depart_from= 'madison' and f0.arrive_at!='new york' and f0.arrive_at=f1.depart_from and f1.arrive_at<>'new york' and f1.arrive_at=f2.depart_from and f2.arrive_at='new york' and f2.arrives<'19:00');
+
+ departs  
+----------
+ 15:45:00
+ 12:00:00
+ 08:00:00
+(3 rows)
+
+
+
+Q j. Compute the difference between the average salary of a pilot and the average salary of all employees (including pilots). 
+
+ select avg(p.salary) - avg(e.salary) as salary_difference from employees p,employees e where p.eid in( select distinct eid from certified ) ;
+
+ salary_difference  
+--------------------
+ -4958.333333333333
+(1 row)
+
+
+
+Q k. Print the name and salary of every nonpilot whose salary is more than the average salary for pilots. 
+
+ select ename, salary from employees where salary>(select avg(p.salary) from employees p where p.eid in (select distinct eid from certified))and eid not in(select eid from certified) ;
+
+ ename  | salary 
+--------+--------
+ chhaya |  75000
+ kalika |  90000
+(2 rows)
+
+
+
+Q l. Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles.
+ 
+ select distinct e.ename from employees e, aircraft a, certified c where e.eid=c.eid and a.aid=c.aid and a.cruising_range>1000; 
+
+    ename     
+--------------
+ vinay mehta
+ tarun garg
+ madhurima
+ suraj sharma
+(4 rows)
+
+--------------------or method 2:-
+
+ select ename from employees where eid in (select c.eid from certified c ,aircraft a where a.aid=c.aid and a.cruising_range>1000); 
+
+    ename     
+--------------
+ vinay mehta
+ tarun garg
+ suraj sharma
+ madhurima
+(4 rows)
+
+
+
+
+Q m. Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles, but on at least two such aircrafts. 
+
+ select e.ename from employees e, aircraft a, certified c where e.eid=c.eid and a.aid=c.aid and a.cruising_range>1000 group by e.ename  having count(*)>2; 
+
+   ename   
+-----------
+ madhurima
+(1 row)
+
+
+
+Q n. Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles and who are certified on some Boeing aircraft. 
+
+ select e.ename from employees e, aircraft a, certified c where e.eid=c.eid and a.aid=c.aid and a.cruising_range>1000 and a.aname like 'boeing'  group by e.ename  ; 
+
+   ename   
+-----------
+ madhurima
+(1 row)
+
