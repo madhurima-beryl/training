@@ -32,10 +32,17 @@ Ruby language has many features. Some of them are explained below:
 8. Exception handling
 9. Garbage collector
 10.Portable
-11.Keywords
-12.Statement delimiters
-13.Variable constants
-14.Naming conventions
+11.Keywords		:	42 keywords which can't be used for other purposes. They are called reserved words.
+
+
+12.Statement delimiters	:	Multiple statements in a single line must contain semi colon in between but not at the end of a line.
+
+13.Variable constants	:	Constants are not really constant. If an already initialized constant will be modified in a script, it will 
+				simply trigger a warning but will not halt your program.
+
+14.Naming conventions	:
+
+
 15.Keyword arguments
 16.Method names
 17.Singleton methods
@@ -68,6 +75,23 @@ puts 		:	basic command to print something out in Ruby
 => nil		:	the result of the expression
 puts always returns nil, which is Ruby’s absolutely-positively-nothing value.
 
+
+*****about nil*******************
+
+2.3.1 :001 > if nil		The code contained within the if is not run, as nil is interpreted as being a false condition.
+2.3.1 :002?>   puts "hello"
+2.3.1 :003?>   end
+ => nil
+
+ false == nil			While both false and nil are both treated as negative when evaluated in an expression, they are not equivalent
+ => false 
+
+*****OPERATORS*******************
+add			:	+
+sub			:	-
+mul			:	*
+div			:	/
+remainder(modulo)	:	%
 
 *****DEFINING METHODS************
 
@@ -102,3 +126,7 @@ sqrt(9)		:	a message which means call the method sqrt, shorthand for “square r
  Modules serve two roles in Ruby.
 1.  grouping similar methods together under a familiar name
 2.  
+
+*****OPERATORS*****************
+
+
