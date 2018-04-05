@@ -86,12 +86,207 @@ puts always returns nil, which is Ruby’s absolutely-positively-nothing value.
  false == nil			While both false and nil are both treated as negative when evaluated in an expression, they are not equivalent
  => false 
 
-*****OPERATORS*******************
+ a= puts "heya"
+heya
+ => nil 
+2.3.1 :010 > puts a
+				blank space (i.e. nil) is printed
+ => nil 
+
+
+*****OPERATIONS*******************
 add			:	+
 sub			:	-
 mul			:	*
 div			:	/
 remainder(modulo)	:	%
+exponent		:	**
+equality comparison	:	==	returns true or false
+string concatination	:	+
+
+examples:-
+
+2.3.1 :001 > 0/4
+ => 0 
+2.3.1 :002 > 4/0
+ZeroDivisionError: divided by 0
+	from (irb):2:in `/'
+	from (irb):2
+	from /home/beryl/.rvm/rubies/ruby-2.3.1/bin/irb:11:in `<main>'
+2.3.1 :003 > 4%6
+ => 4 
+2.3.1 :004 > 40%6
+ => 4 
+2.3.1 :005 > 40.0%6
+ => 4.0 
+2.3.1 :006 > 40.000%6
+ => 4.0 
+
+Q Use the modulo operator, division, or a combination of both to take a 4 digit number and find the digit in the:
+ 1) thousands place 
+ 2) hundreds place 
+ 3) tens place 
+ 4) ones place
+
+A 2.3.1 :019 > x = 1234
+  => 1234 
+  2.3.1 :020 > thousands = x/1000
+  => 1 
+  2.3.1 :021 > hundreds = x % 1000 /100 
+  => 2 
+  2.3.1 :022 > tens = x % 100 /10 
+  => 3 
+  2.3.1 :023 > ones = x % 10 
+  => 4 
+
+
+equality comparison eg-
+2.3.1 :008 > 4==5
+ => false 
+2.3.1 :009 > 'foo'=='foo'
+ => true 
+2.3.1 :010 > 'foo'=='bar'
+ => false 
+2.3.1 :011 > '4'==4
+ => false 		Because '4' is a string and 4 is an integer, the == operator returns false.
+
+string concatination eg-
+2.3.1 :013 > 'madhu' + 'rima'
+ => "madhurima" 
+2.3.1 :014 > '1' + '2'
+ => "12"
+2.3.1 :015 > 'one'+ '1'
+ => "one1" 
+2.3.1 :016 > 'one'+ 1
+TypeError: no implicit conversion of Fixnum into String		
+	from (irb):16:in `+'
+	from (irb):16
+	from /home/beryl/.rvm/rubies/ruby-2.3.1/bin/irb:11:in `<main>'
+
+we cannot add a Fixnum and String together. By the way, a FixNum is just an integer.
+
+*****TYPE CONVERSION*************
+
+--String to integer & float
+
+2.3.1 :018 > '9'.to_i
+ => 9 
+2.3.1 :019 > '9'.to_f
+ => 9.0 
+2.3.1 :020 > '9.0000'.to_f
+ => 9.0 
+2.3.1 :021 > '9.0000'.to_i
+ => 9 
+2.3.1 :022 > '9 madhurima'.to_i
+ => 9 
+2.3.1 :023 > '9 madhurima'.to_f
+ => 9.0 
+2.3.1 :024 > 'madhurima 9'.to_i
+ => 0 
+2.3.1 :025 > 'madhurima 9'.to_f
+ => 0.0 
+
+--Integer/Float to string
+
+2.3.1 :026 > 4.to_s
+ => "4" 
+2.3.1 :027 > 4.0000.to_s
+ => "4.0" 
+
+*****VARIABLES*******************
+
+Variables are containers that hold information. Their sole purpose is to label and store data in memory. This data can then be used throughout your program.
+
+--Assigning values to variables
+
+2.3.1 :079 > name = 'madhu'
+ => "madhu" 
+2.3.1 :080 > name			referencing variable
+ => "madhu" 
+2.3.1 :081 > name= name + 'rima'
+ => "madhurima" 
+
+*****gets************************
+
+--Getting Data from a User
+
+gets stands for "get string".
+2.3.1 :083 > name = gets
+neelima
+ => "neelima\n"
+ The \n at the end is the "newline" character and represents the enter key. 
+
+--put .chomp after any string to remove the carriage return characters at the end.
+
+2.3.1 :084 > name = gets.chomp
+neelima
+ => "neelima" 
+2.3.1 :085 > name + ' is cool'
+ => "neelima is cool" 
+ 
+--Variable Scope
+
+In Ruby, variable scope is defined by a block. A block is a piece of code following a method invocation, usually delimited by either curly braces {} or do/end. Be aware that not all do/end pairs imply a block.
+
+Inner scope can access variables initialized in an outer scope, but not vice versa.
+
+2.3.1 :086 > a=5
+ => 5 
+2.3.1 :087 > 3.times do |n|
+2.3.1 :088 >     a=3
+2.3.1 :089?>   end
+ => 3 
+2.3.1 :090 > puts a
+3
+ => nil 
+2.3.1 :091 > a=5
+ => 5 
+2.3.1 :092 > 3.times do |n|
+2.3.1 :093 >     a=3
+2.3.1 :094?>   b=5
+2.3.1 :095?>   end
+ => 3 
+2.3.1 :096 > puts a
+3
+ => nil 
+2.3.1 :097 > puts b
+NameError: undefined local variable or method `b' for main:Object
+	from (irb):97
+	from /home/beryl/.rvm/rubies/ruby-2.3.1/bin/irb:11:in `<main>'
+
+--Types of Variables (5)
+
+1. Constants: 
+
+	Declared by capitalizing every letter in the variable's name. They are used for storing data that never needs to change. You can change the value but ruby throws a warning.
+-> Constants cannot be declared in method definitions
+-> Constans are available throughout your application's scopes.
+
+EXAMPLE :-
+
+2.3.1 :100 > MY_CONSTANT = 'you cannot change'
+
+2.3.1 :101 >  MY_CONSTANT = 'you cannot change me'
+(irb):101: warning: already initialized constant MY_CONSTANT
+(irb):100: warning: previous definition of MY_CONSTANT was here
+ => "you cannot change me" 
+
+
+
+2. Global variables ($) :
+
+	 These variables are available throughout your entire app, overriding all scope boundaries. Rubyists tend to stay away from global variables as there can be unexpected complications when using them.
+
+EXAMPLE :-
+
+2.3.1 :104> $var = 'available throughout app'
+ => "available throughout app" 
+
+
+3. Class variables (@@) :
+
+	
+
 
 *****DEFINING METHODS************
 
@@ -128,5 +323,51 @@ sqrt(9)		:	a message which means call the method sqrt, shorthand for “square r
 2.  
 
 *****OPERATORS*****************
+***** miscellanious************
+
+ARRAY
+2.3.1 :001 > [1,2,3,4,5]
+ => [1, 2, 3, 4, 5] 
+2.3.1 :002 > [1,2,3,4,5][3]
+ => 4 
+2.3.1 :003 > [1,2,3,4,5][-1]
+ => 5 
+2.3.1 :004 > [1,2,3,4,5][-2]
+ => 4 
+2.3.1 :005 > [1,2,3,4,5].last
+ => 5 
+2.3.1 :006 > [1,2,3,4,5].first
+ => 1 
+2.3.1 :007 > [1,2,3,4,5][-6]
+ => nil 
+2.3.1 :008 > [1,2,3,4,5][6]
+ => nil 
+
+HASHES
+Q Write a program that uses a hash to store a list of movie titles with the year they came out. Then use the puts command to make your program print out the year of each movie to the screen. The output for your program should look something like this.
+
+2.3.1 :055 > movies = { abcd: 2015,
+2.3.1 :056 >     hichki: 2019,
+2.3.1 :057 >     soldier: 2000,
+2.3.1 :058 >     idiots: 2014,
+2.3.1 :059 >     udaan:2016,
+2.3.1 :060 >     golmaal3: 2018}
+ => {:abcd=>2015, :hichki=>2019, :soldier=>2000, :idiots=>2014, :udaan=>2016, :golmaal3=>2018} 
+2.3.1 :061 > puts movies[:abcd]
+2015
+ => nil 
+
+Q Use the dates from the previous example and store them in an array. Then make your program output the same thing as above ques.
+
+2.3.1 :067 > dates = [:abcd]		wrong way
+ => [:abcd] 
+2.3.1 :068 > dates = [movies[:abcd], movies[:hichki]]
+ => [2015, 2019] 
+2.3.1 :069 > dates[0]
+ => 2015 
+2.3.1 :070 > puts dates[0]
+2015
+ => nil 
+
 
 
