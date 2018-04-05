@@ -1,0 +1,159 @@
+				HOSPITAL MANAGEMENT SYSTEM
+
+city_hospital=# \d
+                List of relations
+ Schema |       Name       |   Type   |  Owner   
+--------+------------------+----------+----------
+ public | appointment      | table    | postgres
+ public | doctor           | table    | postgres
+ public | doctor_d_id_seq  | sequence | postgres
+ public | patient          | table    | postgres
+ public | patient_p_id_seq | sequence | postgres
+ public | specialization   | table    | postgres
+(6 rows)
+
+city_hospital=# \d doctor
+                                  Table "public.doctor"
+ Column  |         Type          |                       Modifiers                       
+---------+-----------------------+-------------------------------------------------------
+ d_id    | integer               | not null default nextval('doctor_d_id_seq'::regclass)
+ d_name  | character varying(20) | not null
+ d_phone | bigint                | not null
+ spcl_no | integer               | 
+Indexes:
+    "doctor_pkey" PRIMARY KEY, btree (d_id)
+Foreign-key constraints:
+    "doctor_spcl_no_fkey" FOREIGN KEY (spcl_no) REFERENCES specialization(spcl_no)
+Referenced by:
+    TABLE "appointment" CONSTRAINT "appointment_d_id_fkey" FOREIGN KEY (d_id) REFERENCES doctor(d_id)
+
+city_hospital=# select * from doctor;
+ d_id | d_name  |  d_phone   | spcl_no 
+------+---------+------------+---------
+    1 | astha   | 5769338958 |     204
+    2 | vishal  | 2640215100 |     201
+    5 | manisha | 9530340004 |     202
+    3 | sohan   | 8842011720 |     201
+    4 | renu    | 7230313230 |     205
+    6 | madhu   | 7098525630 |     203
+(6 rows)
+
+city_hospital=# \d patient
+                                  Table "public.patient"
+  Column  |         Type          |                       Modifiers                        
+----------+-----------------------+--------------------------------------------------------
+ p_id     | integer               | not null default nextval('patient_p_id_seq'::regclass)
+ p_name   | character varying(20) | not null
+ p_age    | smallint              | 
+ p_gender | character(1)          | 
+ p_phone  | bigint                | 
+Indexes:
+    "patient_pkey" PRIMARY KEY, btree (p_id)
+Referenced by:
+    TABLE "appointment" CONSTRAINT "appointment_p_id_fkey" FOREIGN KEY (p_id) REFERENCES patient(p_id)
+
+city_hospital=# select * from patient;
+ p_id |   p_name    | p_age | p_gender |  p_phone   
+------+-------------+-------+----------+------------
+    1 | kanika      |    12 | f        |      22021
+    2 | rahul       |    45 | m        |      89841
+    3 | sona        |    34 | f        |     724810
+    4 | chand kumar |    85 | m        |    6054251
+    5 | radhika     |    67 | f        |     414901
+    6 | sunder      |    26 | m        |      34506
+    7 | mohit       |     5 | m        |      89896
+    8 | santosh     |    76 | m        |     685738
+    9 | farah       |    29 | f        | 9513020551
+(9 rows)
+
+city_hospital=# \d appointment
+          Table "public.appointment"
+  Column  |          Type          | Modifiers 
+----------+------------------------+-----------
+ app_no   | integer                | not null
+ p_id     | integer                | 
+ d_id     | integer                | 
+ app_time | time without time zone | not null
+Indexes:
+    "appointment_pkey" PRIMARY KEY, btree (app_no)
+Foreign-key constraints:
+    "appointment_d_id_fkey" FOREIGN KEY (d_id) REFERENCES doctor(d_id)
+    "appointment_p_id_fkey" FOREIGN KEY (p_id) REFERENCES patient(p_id)
+
+city_hospital=# select * from appointment;
+ app_no | p_id | d_id | app_time 
+--------+------+------+----------
+    101 |    2 |    1 | 10:00:00
+    102 |    1 |    1 | 10:30:00
+    103 |    3 |    2 | 09:00:00
+    104 |    5 |    5 | 13:00:00
+    105 |    4 |    1 | 12:00:00
+    106 |    5 |    2 | 09:00:00
+    107 |    1 |    4 | 15:00:00
+(7 rows)
+
+city_hospital=# \d specialization
+         Table "public.specialization"
+  Column   |         Type          | Modifiers 
+-----------+-----------------------+-----------
+ spcl_no   | integer               | not null
+ spcl_name | character varying(30) | not null
+Indexes:
+    "specialization_pkey" PRIMARY KEY, btree (spcl_no)
+Referenced by:
+    TABLE "doctor" CONSTRAINT "doctor_spcl_no_fkey" FOREIGN KEY (spcl_no) REFERENCES specialization(spcl_no)
+
+city_hospital=# select * from specialization;
+ spcl_no | spcl_name  
+---------+------------
+     201 | kidney
+     202 | eye
+     203 | dental
+     204 | nutrition
+     205 | brain
+     206 | child care
+(6 rows)
+
+city_hospital=# select s.spcl_name, count(d.d_id) from specialization s, doctor d where d.spcl_no=s.spcl_no group by spcl_name;
+
+spcl_name | count 
+-----------+-------
+ kidney    |     2
+ dental    |     1
+ nutrition |     1
+ eye       |     1
+ brain     |     1
+(5 rows)
+
+city_hospital=# select spcl_name, count(d_id) from specialization inner join doctor on specialization.spcl_no=doctor.spcl_no group by spcl_name;
+ spcl_name | count 
+-----------+-------
+ kidney    |     2
+ dental    |     1
+ nutrition |     1
+ eye       |     1
+ brain     |     1
+(5 rows)
+
+city_hospital=# select p_name, doctor.d_name, appointment.app_time from patient inner join appointment on patient.p_id=appointment.p_id inner join doctor on doctor.d_id=appointment.d_id;
+   p_name    | d_name  | app_time 
+-------------+---------+----------
+ rahul       | astha   | 10:00:00
+ kanika      | astha   | 10:30:00
+ sona        | vishal  | 09:00:00
+ radhika     | manisha | 13:00:00
+ chand kumar | astha   | 12:00:00
+ radhika     | vishal  | 09:00:00
+ kanika      | renu    | 15:00:00
+(7 rows)
+
+city_hospital=# select p_name, doctor.d_name, appointment.app_time from patient inner join appointment on patient.p_id=appointment.p_id inner join doctor on doctor.d_id=appointment.d_id offset 1 limit 4 ;
+   p_name    | d_name  | app_time 
+-------------+---------+----------
+ kanika      | astha   | 10:30:00
+ sona        | vishal  | 09:00:00
+ radhika     | manisha | 13:00:00
+ chand kumar | astha   | 12:00:00
+(4 rows)
+
+
