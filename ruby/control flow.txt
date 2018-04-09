@@ -1,0 +1,206 @@
+------------PROGRAMS-----------------
+
+puts "Please enter a number between 0 and 100."
+number = gets.chomp.to_i
+
+if number < 0
+  puts "You can't enter a negative number!"
+elsif number <= 50
+  puts "#{number} is between 0 and 50"
+elsif number <= 100
+  puts "#{number} is between 51 and 100"
+else
+  puts "#{number} is above 100"
+end
+====== 
+ruby calc.rb
+Please enter a number between 0 and 100.
+-9
+You can't enter a negative number!
+beryl@beryl-Inspiron-5542:~$ ruby calc.rb
+Please enter a number between 0 and 100.
+34
+34 is between 0 and 50
+beryl@beryl-Inspiron-5542:~$ ruby calc.rb
+Please enter a number between 0 and 100.
+0
+0 is between 0 and 50
+beryl@beryl-Inspiron-5542:~$ ruby calc.rb
+Please enter a number between 0 and 100.
+78
+78 is between 51 and 100
+beryl@beryl-Inspiron-5542:~$ ruby calc.rb
+Please enter a number between 0 and 100.
+100
+100 is between 51 and 100
+beryl@beryl-Inspiron-5542:~$ ruby calc.rb
+Please enter a number between 0 and 100.
+5310
+5310 is above 100
+
+or
+
+def evaluate_num(number)
+  case
+  when number < 0
+    puts "You can't enter a negative number!"
+  when number <= 50
+    puts "#{number} is between 0 and 50"
+  when number <= 100
+    puts "#{number} is between 51 and 100"
+  else
+    puts "#{number} is above 100"
+  end
+end
+
+puts "Please enter a number between 0 and 100."
+number = gets.chomp.to_i
+
+evaluate_num(number)
+======
+ruby calc.rb
+Please enter a number between 0 and 100.
+187
+187 is above 100
+
+----------------------------------
+   y = 9
+   x = 10
+   if (x + 1) <= (y)
+     puts "Alright."
+   elsif (x + 1) >= (y)
+     puts "Alright now!"
+   elsif (y + 1) == x
+     puts "ALRIGHT NOW!"
+   else
+     puts "Alrighty!"
+   end
+======
+Alright now!
+---------------------------------
+
+*****RECURSIVE FUNCTION**********
+
+---------FACTORIAL---------------
+def fact(num)
+	if num==0
+		puts 1
+	elsif num==1
+		num
+		
+	else 
+		num * fact(num-1)
+	end
+end 
+
+puts"enter number"
+num= gets.chomp.to_i
+puts "factorial is #{fact(num)}"
+======
+enter number
+5
+factorial is 120
+
+----------FIBONACCI---------------
+def fib(num)
+	if num==1
+		1
+	elsif num==2
+		1				
+	else 
+		fib(num-1) + fib(num-2)
+	end
+end 
+
+puts"enter position"
+pos= gets.chomp.to_i
+puts "fibonacci no is #{fib(pos)}"
+======
+enter position
+7
+fibbonacci no is 13
+
+--OR--
+
+def fib(n)
+   n <= 1 ? n :  fib(n-1) + fib(n-2) 
+end
+
+puts"enter position"
+pos= gets.chomp.to_i
+
+puts "fibonacci no is #{fib(pos)}"
+======
+enter position
+7
+
+--OR--
+
+-------WITHOUT RECURSION---------
+puts"enter position"
+pos= gets.chomp.to_i
+
+puts "fibonacci series is"
+one=0
+two=0
+num=1
+for i in 1..pos do
+	print "#{num}	"
+	one = two
+	two = num
+	num = one + two
+end
+puts ""
+======
+enter position
+7
+fibonacci series is
+1	1	2	3	5	8	13	
+
+fibonacci no is 13
+
+-------------------------------
+Q Use the each_with_index method to iterate through an array of your creation that prints each index and value of the array.
+
+
+arr=['abc','def','ghi']
+arr.each_with_index do |alpha,index|
+puts "#{index}.#{alpha}"
+end
+=====
+0.abc
+1.def
+2.ghi
+
+-----------------------------
+Q Write a method that counts down to zero using recursion.
+
+def count_down(num)
+	if num<0
+		puts "can't put negative nos"
+	elsif num==0
+		puts num
+	else 
+		puts num
+		count_down(num-1)
+	end
+end
+
+puts "counting down to zero. enter start no"
+num = gets.chomp.to_i
+count_down(num)
+======
+counting down to zero. enter start no
+-5
+can't put negative nos
+beryl@beryl-Inspiron-5542:~$ ruby name.rb
+counting down to zero. enter start no
+4
+4
+3
+2
+1
+0
+
+----------------------------------
+

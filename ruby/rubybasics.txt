@@ -78,20 +78,36 @@ puts always returns nil, which is Ruby’s absolutely-positively-nothing value.
 
 *****about nil*******************
 
-2.3.1 :001 > if nil		The code contained within the if is not run, as nil is interpreted as being a false condition.
+2.3.1 :001 > if nil		#The code contained within the if is not run, as nil is interpreted as being a false condition.
 2.3.1 :002?>   puts "hello"
 2.3.1 :003?>   end
  => nil
 
- false == nil			While both false and nil are both treated as negative when evaluated in an expression, they are not equivalent
+ false == nil			#While both false and nil are both treated as negative when evaluated in an expression, they are not equivalent
  => false 
 
  a= puts "heya"
 heya
  => nil 
 2.3.1 :010 > puts a
-				blank space (i.e. nil) is printed
+				#blank space (i.e. nil) is printed
  => nil 
+
+*****puts, p and print*************
+
+2.3.1 :003 > puts x=2		#puts return nil in new line
+2
+ => nil 
+2.3.1 :004 > p x=2		#p returns value of data type
+2
+ => 2 
+2.3.1 :005 > p x="bat"
+"bat"
+ => "bat" 
+2.3.1 :006 > print x = 2	#print return nil in same line
+2 => nil 
+2.3.1 :007 > print x = "bat"
+bat => nil 
 
 
 *****OPERATIONS*******************
@@ -148,7 +164,7 @@ equality comparison eg-
 2.3.1 :010 > 'foo'=='bar'
  => false 
 2.3.1 :011 > '4'==4
- => false 		Because '4' is a string and 4 is an integer, the == operator returns false.
+ => false 		#Because '4' is a string and 4 is an integer, the == operator returns false.
 
 string concatination eg-
 2.3.1 :013 > 'madhu' + 'rima'
@@ -201,7 +217,7 @@ Variables are containers that hold information. Their sole purpose is to label a
 
 2.3.1 :079 > name = 'madhu'
  => "madhu" 
-2.3.1 :080 > name			referencing variable
+2.3.1 :080 > name			#referencing variable
  => "madhu" 
 2.3.1 :081 > name= name + 'rima'
  => "madhurima" 
@@ -285,7 +301,62 @@ EXAMPLE :-
 
 3. Class variables (@@) :
 
-	
+	 When you need to declare a variable that is related to a class, but each instance of that class does not need its own value for this variable, you use a class variable. Class variables must be initialized at the class level, outside of any method definitions.
+
+4. Local variables :
+
+_________________________
+# name.rb
+puts "Enter your name"
+name = gets.chomp
+puts "hello " + name
+
+10.times do puts name end
+==================
+result:
+ ruby name.rb
+Enter your name
+reena
+hello reena
+reena
+reena
+reena
+reena
+reena
+reena
+reena
+reena
+reena
+reena
+_________________________
+
+# name.rb
+puts "Enter your first name"
+fname = gets.chomp
+puts "Enter your last name"
+lname = gets.chomp
+puts fname + " " + lname
+========
+ ruby name.rb
+Enter your first name
+wini
+Enter your last name
+gaur
+wini gaur
+________________________
+
+#age.rb
+puts "how old are you?"
+age = gets.chomp.to_i
+puts "after 10 years you will be \n "
+puts age+10
+========
+ ruby age.rb
+how old are you
+12    
+after then years yo will be 
+ 
+22
 
 
 *****DEFINING METHODS************
@@ -359,7 +430,7 @@ Q Write a program that uses a hash to store a list of movie titles with the year
 
 Q Use the dates from the previous example and store them in an array. Then make your program output the same thing as above ques.
 
-2.3.1 :067 > dates = [:abcd]		wrong way
+2.3.1 :067 > dates = [:abcd]		#wrong way
  => [:abcd] 
 2.3.1 :068 > dates = [movies[:abcd], movies[:hichki]]
  => [2015, 2019] 

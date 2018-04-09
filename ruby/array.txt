@@ -1,0 +1,79 @@
+			ARRAY
+
+An array is an ordered list of elements that can be of any type. 
+
+Example:
+
+2.3.1 :001 > [ 4, 'madhu', 3.000, "chhabra"]
+ => [4, "madhu", 3.0, "chhabra"] 
+
+The above array has strings, an integer, and a float. Arrays can have anything in them (even other arrays!).
+
+ a1 = [ 28, 41,73,85]
+ => [28, 41, 73, 85] 
+2.3.1 :003 > arr = [ 4, 'madhu', 3.000, "chhabra",a1]
+ => [4, "madhu", 3.0, "chhabra", [28, 41, 73, 85]] 
+
+
+------methods on array------------
+ arr.first			#first element
+ => 4 
+
+2.3.1 :005 > arr.last		#last element
+ => [28, 41, 73, 85] 
+
+ arr[3]				#index of element
+ => "chhabra" 
+
+map	:	The map method iterates over an array applying a block to each element of the array and returns a new array with those 			results. 
+collect	:	Same as map
+
+a1
+ => [28, 41, 73, 85] 
+2.3.1 :013 > a1.map {|num| num+2}			#non destructive(does not mutate the caller)
+ => [30, 43, 75, 87] 
+2.3.1 :014 > a1.map {|num| num**2}
+ => [784, 1681, 5329, 7225] 
+2.3.1 :015 > a1.map {|num| Math.sqrt(num)}
+ => [5.291502622129181, 6.4031242374328485, 8.54400374531753, 9.219544457292887] 
+2.3.1 :016 > a1
+ => [28, 41, 73, 85] 
+2.3.1 :017 > a1.map {|num| Math.sqrt(num)**2}
+ => [28.000000000000004, 41.0, 72.99999999999999, 85.0] 
+2.3.1 :018 > a1.map {|num| Math.sqrt(num**2)}
+ => [28.0, 41.0, 73.0, 85.0] 
+
+arr
+ => [4, "madhu", 3.0, "chhabra", [28, 41, 73, 85]] 
+2.3.1 :022 > arr.pop					#mutates the caller (removes last element)
+ => [28, 41, 73, 85] 
+2.3.1 :023 > arr
+ => [4, "madhu", 3.0, "chhabra"] 
+2.3.1 :024 > arr.push(4)				#adding element to last
+ => [4, "madhu", 3.0, "chhabra", 4] 
+2.3.1 :025 > arr << 32					#same as push
+ => [4, "madhu", 3.0, "chhabra", 4, 32] 
+
+
+2.3.1 :026 > arr.delete_at(3)				#eliminates the value at a certain index from your array.(returns value deleted)
+ => "chhabra" 
+2.3.1 :027 > arr
+ => [4, "madhu", 3.0, 4, 32] 
+2.3.1 :028 > arr.delete(4)				#permanently deletes all instances of the provided value from the array.
+ => 4 
+2.3.1 :029 > arr
+ => ["madhu", 3.0, 32] 
+
+uniq	:	It iterates through an array, deletes any duplicate values that exist, then returns the result as a new array.
+
+b= [1,1,1,1,2,2,6,6,6]
+ => [1, 1, 1, 1, 2, 2, 6, 6, 6] 
+2.3.1 :032 > b.uniq					#uniq method did not modify the original b array; it returned a new array with the 
+ => [1, 2, 6] 						#duplicates removed.
+2.3.1 :033 > b
+ => [1, 1, 1, 1, 2, 2, 6, 6, 6] 
+
+ b.uniq!						# the bang operator (!) to this method, you can perform the uniq function 
+ => [1, 2, 6]						# destructively. Much like the way the delete method works. 
+2.3.1 :035 > b
+ => [1, 2, 6] 
