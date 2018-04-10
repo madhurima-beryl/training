@@ -1,0 +1,217 @@
+			HASH
+A hash is a data structure that stores items by associated keys.Entries in a hash are often referred to as key-value pairs. This creates an associative representation of data.
+
+example :
+person = { :name => 'madhu', :place => 'faridabad', :office => 'beryl'}
+ => {:name=>"madhu", :place=>"faridabad", :office=>"beryl"} 
+
+------------------------
+adding to an existing hash
+
+person[:address] = 'sec 11'
+ => "sec 11" 
+person
+ => {:name=>"madhu", :place=>"faridabad", :office=>"beryl", :address=>"sec 11"} 
+
+-------------------------
+remove from an existing hash
+person.delete(:address)
+ => "sec 11" 
+person
+ => {:name=>"madhu", :place=>"faridabad", :office=>"beryl"} 
+
+-------------------------
+retrieve info
+
+person[:name]
+ => "madhu" 
+
+-------------------------
+merge two hashes
+languages = {:l1 => 'hindi' , :l2 => 'english'}
+ => {:l1=>"hindi", :l2=>"english"} 
+
+--CREATING NEW MERGE HASH KEEPING ORIGINAL UNMODIFIED
+
+2.3.1 :013 > person.merge(languages)
+ => {:name=>"madhu", :place=>"faridabad", :office=>"beryl", :l1=>"hindi", :l2=>"english"} 
+
+2.3.1 :014 > person
+ => {:name=>"madhu", :place=>"faridabad", :office=>"beryl"} 
+
+2.3.1 :015 > languages
+ => {:l1=>"hindi", :l2=>"english"} 
+
+--MODIFYING ORIGINAL HASH
+2.3.1 :016 > person.merge!(languages)
+ => {:name=>"madhu", :place=>"faridabad", :office=>"beryl", :l1=>"hindi", :l2=>"english"} 
+
+2.3.1 :017 > person
+ => {:name=>"madhu", :place=>"faridabad", :office=>"beryl", :l1=>"hindi", :l2=>"english"} 
+
+2.3.1 :018 > languages
+ => {:l1=>"hindi", :l2=>"english"} 
+
+---------Iterating Over Hashes----------------
+
+hash_name.each do |key,value|
+	#code
+end
+
+example:
+
+person = {:name=>"madhu", :place=>"faridabad", :office=>"beryl"} 
+
+person.each do |k,v|
+	puts "my #{k} is #{v}"
+end
+======
+my name is madhu
+my place is faridabad
+my office is beryl
+
+----------Hashes as Optional Parameters-----------
+
+def greeting(name, options = {})
+  if options.empty?
+    puts "Hi, my name is #{name}"
+  else
+    puts "Hi, my name is #{name} and I'm #{options[:age]}" +
+         " years old and I live in #{options[:city]}."
+  end
+end
+
+greeting("Bob")
+greeting("Bob", {age: 62, city: "New York City"})
+
+
+Note
+The curly braces, { }, are not required when a hash is the last argument,this convention is commonly used by Rails developers.
+
+example
+greeting("Bob", age: 62, city: "New York City")
+
+---------Hashes vs. Arrays------------
+
+	HASH					ARRAY
+->specific label				_____
+  eg person[:hobby]
+
+->	_____				order necessary
+
+->	_____				stack or queue
+
+--------Hash Keys---------------
+
+{'one' => 'madhu'}		#string as key
+ => {"one"=>"madhu"} 
+
+{['one'] => 'madhu'}		#array as key
+ => {["one"]=>"madhu"} 
+
+{1 => 'madhu'}			#integer as key
+ => {1=>"madhu"} 
+
+{1.099 => 'madhu'}		#float as key
+ => {1.099=>"madhu"}
+
+{{ :k => 'key'}=> 'madhu'}	#hash as key
+ => {{:k=>"key"}=>"madhu"} 
+
+
+but generally we use symbol as hash key
+
+---------METHODS---------------
+
+has_key?	:	 check if a hash contains a specific key
+
+select		:	The select method allows you to pass a block and will return any key-value pairs that evaluate to true when ran 			through the block.
+
+fetch		:	The fetch method allows you to pass a given key and it will return the value for that key if it exists. You can also 				specify an option for return if that key is not present.
+
+to_a		:	The to_a method returns an array version of your hash when called.
+person.has_key?(:name)
+ => true 
+
+keys		:	retrieve all the keys 
+
+values		:	retrieve all the values
+
+
+person.select { |k,v| k== :name || v== 'faridabad'}
+ => {:name=>"madhu", :place=>"faridabad"} 
+
+ person.fetch( :name)
+ => "madhu" 
+
+ person.fetch( :age)
+KeyError: key not found: :age
+	from (irb):30:in `fetch'
+	from (irb):30
+	from /home/beryl/.rvm/rubies/ruby-2.3.1/bin/irb:11:in `<main>'
+
+ person.fetch( :age, "does not exist")
+ => "does not exist" 
+
+person.to_a
+ => [[:name, "madhu"], [:place, "faridabad"], [:office, "beryl"]] 
+
+person.keys
+ => [:name, :place, :office] 
+
+person.values
+ => ["madhu", "faridabad", "beryl"] 
+
+-----------PROGRAMS-------------
+
+Q Given a hash of family members, with keys as the title and an array of names as the values, use Ruby's built-in select method to gather only immediate family members' names into a new array.
+
+
+family = {  uncles: ["bob", "joe", "steve"],
+            sisters: ["jane", "jill", "beth"],
+            brothers: ["frank","rob","david"],
+            aunts: ["mary","sally","susan"]
+          }
+
+imm_fam= family.select do |k,v|
+	k== :sisters || k== :brothers
+end
+
+arr = imm_fam.values
+#arr = imm_fam.values.flatten
+
+puts arr
+======
+{:sisters=>["jane", "jill", "beth"], :brothers=>["frank", "rob", "david"]}
+
+or
+
+jane			#arr = imm_fam.values.flatten
+jill
+beth
+frank
+rob
+david
+
+_________________________
+Q Using some of Ruby's built-in Hash methods, write a program that loops through a hash and prints all of the keys. Then write a program that does the same thing except printing the values. Finally, write a program that prints both.
+
+person = {:name=>"madhu", :place=>"faridabad", :office=>"beryl"} 
+
+person.each_key { |key| puts key }
+person.each_value { |value| puts value }
+person.each do |k,v|
+puts "#{k} : #{v}"
+end
+======
+name
+place
+office
+madhu
+faridabad
+beryl
+name : madhu
+place : faridabad
+office : beryl
+
+
