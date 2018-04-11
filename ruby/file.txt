@@ -1,0 +1,137 @@
+			FILE
+
+A File represents digital information that exists on durable storage.
+
+*****Creating a file(in irb)******
+
+my_file = File.new("simple_file.txt", "w+")
+ => #<File:simple_file.txt> 
+
+The file will be created in the directory from which irb was opened.
+
+********Closing a file***********
+Always close files. Open files will continue to occupy space in memory.(like wastage of water from open tap)
+
+example- 
+my_file.close
+ => nil 
+
+********Opening Files************
+
+MODES :
+
+r	: 	read-only (starts at beginning of file)
+r+	: 	read-write (starts at beginning of file)
+
+w	:	write-only (if the file exists, overwrites everything in the file)
+w+	:	read-write (if the file exists, overwrites everything in the file)
+
+a	:	write-only (if file exists, starts at end of file. Otherwise creates a new file).
+a+	:	read-write (if file exists, starts at end of file. Otherwise creates a new file). Suitable for updating files.
+
+_______________________
+Open File For Writing
+_______________________
+
+METHOD 1 : write
+ Ruby will automatically close the file if the open method is called with a block.
+
+example-
+ File.open("simple_file.txt", "w"){ |file| file.write(" adding first line using write") }
+ => 30 
+-------------
+METHOD 2 : puts
+ open the file, write to it and finally close it
+
+example-
+sample = File.open("simple_file.txt", "a+")		#opened in append mode
+ => #<File:simple_file.txt> 
+
+sample.puts("second line using puts")
+ => nil 
+
+sample.close
+ => nil 
+
+File.read("simple_file.txt")
+ => " adding first line using writesecond line using puts\n" 
+
+_______________________
+Open File For Reading
+_______________________
+
+File.read("file_name") - Spits out entire contents of the file.
+File.readlines("file_name") - Reads the entire file based on individual lines and returns those lines in an array.
+
+example-
+File.read("simple_file.txt")
+ => " adding first line using writesecond line using puts\nhello\nhow are you\n" 
+
+File.readlines("simple_file.txt")
+ => [" adding first line using writesecond line using puts\n", "hello\n", "how are you\n"] 
+
+
+
+----INSERING MORE TEXT INTO FILE-------
+
+METHOD 3 : << (shovel operator)
+
+2.3.1 :034 > File.open("simple_file.txt", "a+") do |file|
+2.3.1 :035 >     file << "with do-end the file will close on its own"
+2.3.1 :036?>   file<< "\nthank you"
+2.3.1 :037?>   end
+ => #<File:simple_file.txt (closed)> 
+2.3.1 :038 > File.readlines("simple_file.txt"). each do |line|
+2.3.1 :039 >     puts line
+2.3.1 :040?>   end
+ adding first line using writesecond line using puts
+hello
+how are you
+with do-end the file will close on its own
+thank you
+ => [" adding first line using writesecond line using puts\n", "hello\n", "how are you\n", "with do-end the file will close on its own\n", "thank you"] 
+
+#######  we can use puts or write in place of <<   ########
+
+
+*******Deleting A File********
+
+File.delete("file_name")
+
+example-
+File.read("simple_file.txt")
+ => " adding first line using writesecond line using puts\nhello\nhow are you\nwith do-end the file will close on its own\nthank you"
+
+File.delete("simple_file.txt")
+ => 1 
+
+File.read("simple_file.txt")
+Errno::ENOENT: No such file or directory @ rb_sysopen - simple_file.txt
+	from (irb):47:in `read'
+	from (irb):47
+	from /home/beryl/.rvm/rubies/ruby-2.3.1/bin/irb:11:in `<main>'
+
+*****Copying contents of a file into a new file*********
+
+simple = File.read("simple_file.txt")
+ => " adding first line using writesecond line using puts\nhello\nhow are you\nwith do-end the file will close on its own\nthank you" 
+
+copyfile = File.new('new_file.txt', "w+")
+ => #<File:new_file.txt> 
+
+File.open(copyfile, "a+") do |file|
+     file.puts simple
+   end
+ => nil 
+
+File.read(copyfile)
+ => " adding first line using writesecond line using puts\nhello\nhow are you\nwith do-end the file will close on its own\nthank you\n" 
+
+********************************
+
+
+Dir  	:	It is an interface for manipulating directories and their contents.Dir shares some of File's methods. However, it is not an IO stream.
+
+Pathname:	used for linking files and directories.The Pathname class exposes pretty much all of the methods of File and Dir. The advantage to using Pathname is you can declare an instance of it and access the class methods of File and Dir on the instance object.
+
+
