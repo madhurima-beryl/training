@@ -1,0 +1,58 @@
+			REGEX
+
+Regex stands for regular expression. 
+
+A regular expression is a sequence of characters that form pattern matching rules,
+ and is then applied to a string to look for matches.
+
+ In Ruby, a pattern is written between forward slash characters. They describe the content of a string. 
+
+eg- /search string/  
+
+******Pattern Matching*****
+
+METHOD 1-  =~ operator 
+
+If a match is found, the operator returns index of first match otherwise nil.
+
+"madhurima" =~ /i/
+ => 6 
+
+"madhurima" =~ /m/
+ => 0 
+
+METHOD 2- match method 
+
+This method returns a MatchData object that describes the match or nil if there is no match.
+
+/i/.match("madhurima")
+ => #<MatchData "i"> 
+
+*******Metacharacters and Escapes********
+
+Metacharacters have specific meaning in a pattern. To match a string, they are back slashed (\\\) or escaped. Some meta characters are (,), (.), (?), (+), (-), (*), [,], {,}.
+
+It returns the specific string when matched otherwise nil.
+
+__________________________________
+	Characters Classes
+__________________________________
+
+A character class is encircled within square brackets.
+
+[ab]
+
+Here, [ab] means a or b.
+
+Example:
+
+2.3.1 :132 > /[a-ge-p]/.match('go')
+ => #<MatchData "g"> 
+2.3.1 :133 > /[a-he-p]/.match('go')
+ => #<MatchData "g"> 
+2.3.1 :134 > /[a-p]/.match('go')
+ => #<MatchData "g"> 
+2.3.1 :135 > /[a-fh-p]/.match('go')
+ => #<MatchData "o"> 
+
+

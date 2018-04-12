@@ -1,0 +1,82 @@
+a = "hi"
+ => "hi" 
+
+b= a
+ => "hi" 
+
+a = "bye"
+ => "bye" 
+
+b
+ => "hi" 
+
+
+
+a = "hi"
+ => "hi" 
+
+b= a
+ => "hi" 
+
+a << ", madhu"
+ => "hi, madhu" 
+
+b
+ => "hi, madhu" 
+
+a
+ => "hi, madhu" 
+
+
+
+a = [1,2,3,3]
+ => [1, 2, 3, 3] 
+
+b = a
+ => [1, 2, 3, 3] 
+
+c = a.uniq
+ => [1, 2, 3] 
+
+a
+ => [1, 2, 3, 3] 
+
+b
+ => [1, 2, 3, 3] 
+
+c
+ => [1, 2, 3] 
+
+
+c = a.uniq!
+ => [1, 2, 3] 
+
+a
+ => [1, 2, 3] 
+
+
+b
+ => [1, 2, 3] 
+
+
+2.3.1 :064 > def test(b)
+2.3.1 :065?>     b.map {|letter| "I like the letter: #{letter}"}
+2.3.1 :066?>   end
+ => :test 
+
+2.3.1 :068 >   a = ['a', 'b', 'c']
+ => ["a", "b", "c"] 
+2.3.1 :069 > test(a)
+ => ["I like the letter: a", "I like the letter: b", "I like the letter: c"] 
+
+
+2.3.1 :070 > def test(b)
+2.3.1 :071?>     b.map! {|letter| "I like the letter: #{letter}"}
+2.3.1 :072?>   end
+ => :test 
+
+2.3.1 :073 > a = ['a', 'b', 'c']
+ => ["a", "b", "c"] 
+
+2.3.1 :074 > test(a)
+ => ["I like the letter: a", "I like the letter: b", "I like the letter: c"]

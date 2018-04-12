@@ -1,0 +1,80 @@
+			BLOCKS AND PROCS
+
+********BLOCK*********
+
+The ampersand (&) in the method definition tells us that the argument is a block. You could name it anything you wanted. The block must always be the last parameter in the method definition.
+
+2.3.1 :075 > def take_block(&bl)
+2.3.1 :076?>   bl.call
+2.3.1 :077?>   end
+ => :take_block 
+
+2.3.1 :078 > take_block do
+2.3.1 :079 >     puts "Block being called in the method"
+2.3.1 :080?>   end
+Block being called in the method
+ => nil 
+
+------------------------
+passing an argument to the method
+
+2.3.1 :082 > def take_block(&bl)
+2.3.1 :083?>   bl.call(numb)
+2.3.1 :084?>   end
+ => :take_block 
+2.3.1 :085 > def take_block(numb,&bl)
+2.3.1 :086?>   bl.call(numb)
+2.3.1 :087?>   end
+ => :take_block 
+2.3.1 :088 > n = 49
+ => 49 
+2.3.1 :089 > take_block(n) do |num|
+2.3.1 :090 >     puts " bock is called in method #{num}"
+2.3.1 :091?>   end
+ bock is called in method 49
+ => nil 
+
+
+********PROC***********
+
+Procs are blocks that are wrapped in a proc object and stored in a variable
+
+2.3.1 :092 > talk = Proc.new do 
+2.3.1 :093 >     puts "I am talking"
+2.3.1 :094?>   end
+ => #<Proc:0x8600010@(irb):92> 
+2.3.1 :095 > talk.call
+I am talking
+ => nil 
+
+---------------------
+Procs can also take arguments if specified.
+
+2.3.1 :096 > talk = Proc.new do |name|
+2.3.1 :097 >     puts "I am talking to #{name}"
+2.3.1 :098?>   end
+ => #<Proc:0x8570cf8@(irb):96> 
+2.3.1 :099 > talk.call "madhu"
+I am talking to madhu
+ => nil 
+
+Procs can be passed into methods.
+
+2.3.1 :118 > def take_proc(pr)
+2.3.1 :119?>   [1,2,3,4,5].each do |num|
+2.3.1 :120 >       pr.call num
+2.3.1 :121?>     end
+2.3.1 :122?>   end
+ => :take_proc 
+2.3.1 :123 > pr_obj = Proc.new do |numb|
+2.3.1 :124 >     puts "#{numb}. Proc being called in method"
+2.3.1 :125?>   end
+ => #<Proc:0x8bb47b8@(irb):123> 
+2.3.1 :126 > take_proc(pr_obj)
+1. Proc being called in method
+2. Proc being called in method
+3. Proc being called in method
+4. Proc being called in method
+5. Proc being called in method
+ => [1, 2, 3, 4, 5] 
+

@@ -1,0 +1,124 @@
+			EXCEPTION HANDLING
+
+Exception handling is a specific process that deals with errors in a manageable and predictable way. 
+
+Ruby has an Exception class that makes handling errors much easier.
+
+Use exception handling when your program is interacting with the outside world, or anything that can behave in an unpredictable manner.
+One common occurrence of this is when a nil value makes its way into our program. 
+________________________
+	SYNTAX
+________________________
+begin
+  # perform some dangerous operation
+rescue
+  # do this if operation fails
+  # for example, log the error
+end
+________________________
+
+
+ When an exception, or error, is raised, the rescue block will execute and then the program will continue to run as it normally would. If we didn't have the rescue block there, our program would stop once it hit the exception and we would lose the rest of our print-out.
+
+example- 
+ names = ['bob', 'joe', 'steve', nil, 'frank']
+ => ["bob", "joe", "steve", nil, "frank"] 
+2.3.1 :137 > 
+2.3.1 :138 >   names.each do |name|
+2.3.1 :139 >       begin
+2.3.1 :140 >           puts "#{name}'s name has #{name.length} letters in it."
+2.3.1 :141?>       rescue
+2.3.1 :142?>         puts "Something went wrong!"
+2.3.1 :143?>       end
+2.3.1 :144?>   end
+bob's name has 3 letters in it.
+joe's name has 3 letters in it.
+steve's name has 5 letters in it.
+Something went wrong!
+frank's name has 5 letters in it.
+ => ["bob", "joe", "steve", nil, "frank"] 
+
+------------------------
+
+rescue reserved word in-line
+
+zero = 0
+ => 0 
+2.3.1 :150 > puts "before each call"
+before each call
+ => nil 
+2.3.1 :151 > zero.each { |element| puts element } rescue puts "can't do that!!!"
+can't do that!!!
+ => nil 
+2.3.1 :152 > puts "after  each call"
+after  each call
+ => nil 
+
+-----------------------
+def divide(number, divisor)
+  begin
+    answer = number / divisor
+  rescue ZeroDivisionError => e
+    puts e.message
+  end
+end
+
+puts divide(16, 4)
+puts divide(4, 0)
+puts divide(14, 7)
+========
+4
+divided by 0
+
+2
+
+******Exceptions & Stack Traces******
+
+In Ruby terms, an exception is raised, which will halt execution unless there is code in place to rescue the exception.
+Ruby has a set of built-in exceptions that also come with an attached message.
+
+how execution works within Ruby, involving the 'stack'?
+
+When ruby invokes a method, the method is added to Ruby's 'stack'. Output from the error provides a detailed trace (known as a stack trace) that shows the flow of execution and where the error occurred. 
+
+example-
+def greet(person)
+  puts "Hello, " + person
+end
+
+greet("John")
+greet(1)
+======
+Hello, John
+name.rb:2:in `+': no implicit conversion of Fixnum into String (TypeError)
+	from name.rb:2:in `greet'
+	from name.rb:6:in `<main>'
+------------
+
+first method calling executed normally
+program execution would look like this:
+
+main -> greet -> puts -> exit and return to main
+
+second method generated an error
+In the second method invocation, greet(1), an error occurs and the program execution flow didn't exit back to main, and stayed in the greet method. The program execution looks like this:
+
+main -> greet -> puts
+
+StandardError
+TypeError
+ArgumentError
+NoMethodError
+RuntimeError
+SystemCallError
+ZeroDivisionError
+RegexpError
+IOError
+EOFError
+ThreadError
+ScriptError
+SyntaxError
+LoadError
+NotImplementedError
+SecurityError
+
