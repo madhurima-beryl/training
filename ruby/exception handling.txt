@@ -93,6 +93,7 @@ Hello, John
 name.rb:2:in `+': no implicit conversion of Fixnum into String (TypeError)
 	from name.rb:2:in `greet'
 	from name.rb:6:in `<main>'
+
 ------------
 
 first method calling executed normally
@@ -104,6 +105,12 @@ second method generated an error
 In the second method invocation, greet(1), an error occurs and the program execution flow didn't exit back to main, and stayed in the greet method. The program execution looks like this:
 
 main -> greet -> puts
+
+The stack trace first tells us where the error occurred : line 2 of name.rb
+
+and why :  the error was because the types don't match.
+
+The error occured due to the call made in the 'main' context on line 6, which contains the line that called the method with incorrect arguments, line 2.
 
 StandardError
 TypeError
