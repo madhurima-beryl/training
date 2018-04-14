@@ -39,3 +39,23 @@ rails new HospitalManagement -d postgresql	#rails new -h (for help)
 
 cd HospitalManagement			#switch to application folder
 
+rails server				#starting web server
+
+*****************************
+Work flow for creating Rails Application is as follows −
+
+->Use the rails command to create the basic skeleton of the application.
+
+->Create a database on the PostgreSQL server to hold your data.
+
+->Configure the application to know where your database is located and the login credentials for it.
+
+->Create Rails Active Records (Models), because they are the business objects you'll be working with in your controllers.
+
+->Generate Migrations that simplify the creating and maintaining of database tables and columns.
+
+->Write Controller Code to put a life in your application.
+
+->Create Views to present your data through User Interface.
+
+
