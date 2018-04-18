@@ -1,9 +1,8 @@
 class CreateAppointments < ActiveRecord::Migration[5.2]
   def change
     create_table :appointments do |t|
-
-  	 	t.belongs_to :patients
-      t.belongs_to :doctors	
+      t.references :patients, foreign_key: true
+      t.references :doctors, foreign_key: true
       t.date :date
       t.time :time
 
