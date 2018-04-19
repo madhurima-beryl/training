@@ -1,7 +1,8 @@
 class Doctor < ApplicationRecord
-	validates :name, :ph_no, :salary, presence: true
-	belongs_to :specilization
-	validates :specilization, presence: true
-	has_many :appointments
-	has_many :patients, through: :appointments
+  belongs_to :specialization
+  has_many :appointments
+  has_many :patients, through: :appointments
+  
+  validates :name, :ph_no, :salary, presence: true
+  validates :specialization, presence: true
 end

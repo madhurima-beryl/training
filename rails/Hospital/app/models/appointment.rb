@@ -1,5 +1,6 @@
 class Appointment < ApplicationRecord
-	validates :date, :time, presence: true
-	belongs_to :doctors
-	belongs_to :patients
+  belongs_to :doctors
+  belongs_to :patients
+  
+  validates :date, :time, presence: true
 end
