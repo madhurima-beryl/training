@@ -1,5 +1,5 @@
 <h1>Doctor#index</h1>
-<p>Find me in app/views/doctor/index.html.erb</p>
+<!--<p>Find me in app/views/doctor/index.html.erb</p>
 <br>
 <br>
 <ul id = "doctors">
@@ -12,5 +12,22 @@
 
    <% end %>
 </ul>
-<%= link_to "Home", "homepage/index" %>
-
+<%= link_to "Home", "homepage/index" %> -->
+<table border="2" cellpadding="10" cellspacing="5" width= "70%" >
+  <tr align= "center">
+    <th>ID</th>
+    <th>NAME</th>
+    <th>PHONE NO</th>
+    <th>SALARY</th>
+    <th>SPECIALIZATION ID</th>
+  </tr>
+  <% @doctors.each do |display| %>
+    <tr align="center">
+      <td><%= display.id %></td>
+      <td><%= display.name %></td>
+      <td><%= display.ph_no %></td>
+      <td><%= display.salary %></td>
+      <td><%= display.specialization_id %></td>
+    </tr>
+  <% end %>
+</table>
