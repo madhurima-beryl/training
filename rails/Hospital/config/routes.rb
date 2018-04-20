@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-#  get 'homepage/index'
+  get 'homepage/index'
   root 'homepage#index'
   get 'doctor/index', to: 'doctor#index'
 
