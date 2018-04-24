@@ -1,0 +1,7 @@
+<%= render "homepage/header"%>
+<h1>Doctors#new</h1>
+<%= form_for @doctor do |f| %>
+  <%= f.text_field :name %>
+ <!--  <%f.submit "Create" %> -->
+<%end%>
+<!-- , url: {action: "create"}, html -->

@@ -7,6 +7,7 @@ class DoctorsController < ApplicationController
   end
 
   def new
+    @doctor = Doctor.new
   end
 
   def edit
