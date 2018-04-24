@@ -1,4 +1,4 @@
-class SpecializationController < ApplicationController
+class SpecializationsController < ApplicationController
   def index
   end
 
