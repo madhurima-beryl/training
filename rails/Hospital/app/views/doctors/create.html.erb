@@ -1,2 +1,8 @@
+<%= render "homepage/header"%>
 <h1>Doctor#create</h1>
-<p>Find me in app/views/doctor/create.html.erb</p>
+Record of <%= @doctor.name %> successfully created<br />
+<%= link_to "New Doctor", "/doctors/new" %>
+<br />
+<%= link_to "List of Doctors", "/doctors" %>
+<br />
+<%= link_to "Home", "homepage/index" %> 

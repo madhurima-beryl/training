@@ -25,10 +25,10 @@ Rails.application.routes.draw do
 #  get 'patients/update'
 #  get 'patients/destroy'
 #  get 'doctors/show'
-  get '/index', to: 'doctors#index' 
+  get 'doctors', to: 'doctors#index' 
   get 'doctors/new', to: 'doctors#new'
 #  get 'doctors/edit'
-#  get 'doctors/create'
+  post 'doctors', to: 'doctors#create'
 #  get 'doctors/update'
 #  get 'doctors/destroy'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
