@@ -5,4 +5,5 @@ class Doctor < ApplicationRecord
   
   validates :name, :ph_no, :salary, presence: true
   validates :specialization, presence: true
+  validates :name, length:{ minimum: 2 }
 end
