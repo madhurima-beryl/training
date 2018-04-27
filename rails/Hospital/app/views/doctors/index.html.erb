@@ -23,16 +23,19 @@
     <th>SALARY</th>
     <th>SPECIALIZATION ID</th>
   </tr>
-  <% @doctors.each do |display| %>
+  <% @doctors.each do |doctor| %>
     <tr align="center">
-      <td><%= display.id %></td>
-      <td><%= display.name %></td>
-      <td><%= display.ph_no %></td>
-      <td><%= display.salary %></td>
-      <td><%= display.specialization_id %></td>
+      <td><%= doctor.id %></td>
+      <td><%= doctor.name %></td>
+      <td><%= doctor.ph_no %></td>
+      <td><%= doctor.salary %></td>
+      <td><%= doctor.specialization_id %></td>
+      <td><%= link_to 'show', doctor %></td>
+      <td><%= link_to 'Destroy', doctor_path(doctor),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
 </table>
 <%= link_to "Home", "homepage/index" %> 
 <%= link_to "New Doctor", "/doctors/new" %>
-

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'homepage/index'
   root 'homepage#index'
   get 'doctors/main', to: 'doctors#main'
-
+  resources :doctors
 #  get 'appointments/index' 
 #  get 'appointments/show'
 #  get 'appointments/new'
@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   get 'doctors/new', to: 'doctors#new'
   get 'doctors/:id', to: 'doctors#show'
   get 'doctors', to: 'doctors#index' 
-#  get 'doctors/edit'
+  get 'doctors/:id/edit', to: 'doctors#edit'
   post 'doctors', to: 'doctors#create'
 #  get 'doctors/update'
 #  get 'doctors/destroy'
