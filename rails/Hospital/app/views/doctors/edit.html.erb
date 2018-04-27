@@ -1,2 +1,33 @@
-<h1>Doctor#edit</h1>
-<p>Find me in app/views/doctor/edit.html.erb</p>
+<%= render "homepage/header"%>
+<h1>Doctors#edit</h1>
+<%= form_for @doctor do |edit| %>
+ 
+  <% if @doctor.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@doctor.errors.count, "error") %> prohibited
+        this edit form from being saved:
+      </h2>
+      <ul>
+        <% @doctor.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <%= edit.label :name %>:
+  <%= edit.text_field :name %><br />
+
+  <%= edit.label :ph_no %>:
+  <%= edit.text_field :ph_no %><br />
+  
+  <%= edit.label :specialization_id %>:
+  <%= edit.text_field :specialization_id %><br />
+  
+  <%= edit.label :salary %>:
+  <%= edit.text_field :salary %><br />
+  
+  <%= edit.submit %> 
+ 
+<% end %>
