@@ -1,15 +1,19 @@
 <%= render "homepage/header"%>
 <h1>Doctors#new</h1>
-<%= form_for @doctor do |f| %>
+<%= form_for @doctor, url: {action: "create"} do |f| %>
 <!--   <%= label_tag(:q, "Name : ") %>-->
   <%= f.label :name %>:
   <%= f.text_field :name %><br />
+
   <%= f.label :ph_no %>:
   <%= f.text_field :ph_no %><br />
+  
   <%= f.label :specialization_id %>:
   <%= f.text_field :specialization_id %><br />
+  
   <%= f.label :salary %>:
   <%= f.text_field :salary %><br />
+  
   <%= f.submit "Create" %> 
 <%end%>
 <br/>

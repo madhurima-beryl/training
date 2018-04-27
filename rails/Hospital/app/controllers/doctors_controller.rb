@@ -4,6 +4,7 @@ class DoctorsController < ApplicationController
   end
 
   def show
+    @doctor = Doctor.find(params[:id])
   end
 
   def new
@@ -16,7 +17,7 @@ class DoctorsController < ApplicationController
   def create
     @doctor = Doctor.new(doctor_params)
     if @doctor.save
-      render "create"
+      redirect_to @doctor
     else
       render "new"
     end
