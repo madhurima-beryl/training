@@ -1,2 +1,8 @@
+<%= render "homepage/header"%>
+
 <h1>Patient#new</h1>
-<p>Find me in app/views/patient/new.html.erb</p>
+<%= render "form" %><br/>
+
+<%= link_to "Clear", new_patient_path %><br/>
+<%= link_to "List of Patients", patients_path %><br/>
+
