@@ -1,2 +1,26 @@
-<h1>Patient#index</h1>
-<p>Find me in app/views/patient/index.html.erb</p>
+<%= render "homepage/header"%>
+
+<h1>Patients#index</h1>
+<table border="2" cellpadding="10" cellspacing="5" width= "70%" >
+  <tr align= "center">
+    <th>ID</th>
+    <th>NAME</th>
+    <th>DOB</th>
+    <th>GENDER</th>
+    <th>PHONE NO</th>
+  </tr>
+  <% @patients.each do |patient| %>
+    <tr align="center">
+      <td><%= patient.id %></td>
+      <td><%= patient.name %></td>
+      <td><%= patient.d_o_b %></td>
+      <td><%= patient.gender %></td>
+      <td><%= patient.ph_no %></td>
+      <td><%= link_to 'Show', patient_path %></td>
+      <td><%= link_to 'Delete', patient_path, method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
+<%= link_to "Home", homepage_index_path %> 
+<%= link_to "New Patient", new_patient_path %>

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'homepage/index'
   root 'homepage#index'
   get 'doctors/main', to: 'doctors#main'
+  get 'patients/main', to: 'patients#main'
   resources :doctors, :patients, :specializations, :appointments
 
 
