@@ -1,45 +1,11 @@
 <%= render "homepage/header"%>
 <h1>Doctors#new</h1>
-<%= form_for @doctor, url: {action: "create"} do |f| %>
-<!--   <%= label_tag(:q, "Name : ") %>-->
-  <% if @doctor.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@doctor.errors.count, "error") %> prohibited
-        this form from being saved:
-      </h2>
-      <ul>
-        <% @doctor.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <%= f.label :name %>:
-  <%= f.text_field :name %><br />
+<%= render "form" %>
 
-  <%= f.label :ph_no %>:
-  <%= f.text_field :ph_no %><br />
-  
-  <%= f.label :specialization_id %>:
-  <%= f.text_field :specialization_id %><br />
-  
-  <%= f.label :salary %>:
-  <%= f.text_field :salary %><br />
-  
-  <%= f.submit "Create" %> 
-<%end%>
 <br/>
-<%= link_to "New Doctor", "/doctors/new" %>
+<%= link_to "Clear", "/doctors/new" %>
 <br/>
 <%= link_to "List of Doctors", "/doctors" %>
 <br/>
 
 
-<!--FORM URL AND HTML OPTIONS 
- , url: {action: "create"}, html: {class: "nifty_form"} -->
-
-<!-- INDIVIDUAL ATTRIBUTE ERROR
-<% @doctor.errors[:name].each do |msg| %>
-          <li><%= msg %></li>
-        <% end %> -->
