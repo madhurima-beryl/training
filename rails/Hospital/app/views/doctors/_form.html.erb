@@ -14,16 +14,17 @@
     </div>
   <% end %>
   <%= f.label :name %>:
-  <%= f.text_field :name %><br />
+  <%= f.text_field :name %><br /><br />
 
   <%= f.label :ph_no %>:
-  <%= f.text_field :ph_no %><br />
+  <%= f.text_field :ph_no %><br /><br />
   
   <%= f.label :specialization_id %>:
-  <%= f.text_field :specialization_id %><br />
-  
+  <!--   <%= f.text_field :specialization_id %><br /> -->
+  <%= f.collection_select( :specialization_id, Specialization.all.order(:id), :id, :name) %><br /><br />
+
   <%= f.label :salary %>:
-  <%= f.text_field :salary %><br />
+  <%= f.text_field :salary %><br /><br />
   
   <%= f.submit %> 
 <%end%>
