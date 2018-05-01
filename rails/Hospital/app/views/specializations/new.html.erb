@@ -1,2 +1,8 @@
+<%= render "homepage/header"%>
+
 <h1>Specialization#new</h1>
-<p>Find me in app/views/specialization/new.html.erb</p>
+<%= render "form" %><br/>
+
+<%= link_to "Clear", new_specialization_path %><br/>
+<%= link_to "List of Specializations", specializations_path %><br/>
+

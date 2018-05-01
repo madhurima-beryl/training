@@ -6,6 +6,7 @@ class SpecializationsController < ApplicationController
   end
 
   def new
+    @specialization = Specialization.new
   end
 
   def edit
