@@ -1,2 +1,27 @@
-<h1>Appointment#index</h1>
-<p>Find me in app/views/appointment/index.html.erb</p>
+<%= render "homepage/header"%>
+
+<h1>Appointments#index</h1>
+
+<table border="2" cellpadding="10" cellspacing="5" width= "70%" >
+  <tr align= "center">
+    <th>ID</th>
+    <th>PATIENT NAME</th>
+    <th>DOCTOR MANE</th>
+    <th>DATE</th>
+    <th>TIME</th>
+  </tr>
+  <% @appointments.each do |appointment| %>  
+    <tr align="center">
+      <td><%= appointment.id %></td>
+      <td><%= appointment.patient_id %></td>
+      <td><%= appointment.doctor_id %></td>
+      <td><%= appointment.date %></td>
+      <td><%= appointment.time %></td>
+      <td><%= link_to 'Show', appointment %></td>
+      <td><%= link_to 'Delete', appointment, method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
+<%= link_to "Home", homepage_index_path %> 
+<%= link_to "Book Appointment", new_appointment_path %>

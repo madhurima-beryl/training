@@ -21,11 +21,12 @@ class PatientsController < ApplicationController
       redirect_to @patient
     else
       render "new"
-    end  end
+    end
+  end
 
   def update
     @patient = Patient.find(params[:id])
- 
+
     if @patient.update(patient_params)
       redirect_to @patient
     else

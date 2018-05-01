@@ -16,8 +16,8 @@
       <td><%= patient.d_o_b %></td>
       <td><%= patient.gender %></td>
       <td><%= patient.ph_no %></td>
-      <td><%= link_to 'Show', patient_path %></td>
-      <td><%= link_to 'Delete', patient_path, method: :delete,
+      <td><%= link_to 'Show', patient %></td>
+      <td><%= link_to 'Delete', patient, method: :delete,
               data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>

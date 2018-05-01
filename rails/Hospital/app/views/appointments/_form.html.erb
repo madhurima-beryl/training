@@ -1,0 +1,29 @@
+<%= form_for @appointment do |f| %>
+  <% if @appointment.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@appointment.errors.count, "error") %> prohibited
+        this form from being saved:
+      </h2>
+      <ul>
+        <% @appointment.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <!-- <%= date_field_tag 'date', '01/01/2014', class: 'special_input', max: "Date.today" %>  -->
+  <%= f.label :patients_id, "Patient's Name" %> :
+  <%= f.collection_select( :patients_id, Patient.all.order(:id), :id, :name) %><br /><br />
+
+  <%= f.label :doctors_id, "Doctor's Name" %> :
+  <%= f.collection_select( :doctors_id, Doctor.all.order(:id), :id, :name) %><br /><br />
+
+  <%#= datetime_local_field(:date, :time, min: Date.today, min: Time.now) %>
+  <%= f.date_select :date, order: [:day, :month, :year], min: Date.today %>
+  <%= f.time_select :time, ignore_date: :true, include_seconds: :true %>
+  
+  <br /><br />
+  <%= f.submit %> 
+<%end%>
