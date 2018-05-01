@@ -14,14 +14,18 @@
   <% end %>
 
     <!-- <%= date_field_tag 'date', '01/01/2014', class: 'special_input', max: "Date.today" %>  -->
-  <%= f.label :patients_id, "Patient's Name" %> :
-  <%= f.collection_select( :patients_id, Patient.all.order(:id), :id, :name) %><br /><br />
+  <%= f.label :patient_id, "Patient's Name" %> :
 
-  <%= f.label :doctors_id, "Doctor's Name" %> :
-  <%= f.collection_select( :doctors_id, Doctor.all.order(:id), :id, :name) %><br /><br />
+  <%= f.collection_select( :patient_id, Patient.all.order(:id), :id, :name) %><br /><br />
+  
+  <%= f.label :doctor_id, "Doctor's Name" %> :
+  <%= f.collection_select( :doctor_id, Doctor.all.order(:id), :id, :name) %><br /><br />
 
+  <%= f.label :date %> :
   <%#= datetime_local_field(:date, :time, min: Date.today, min: Time.now) %>
-  <%= f.date_select :date, order: [:day, :month, :year], min: Date.today %>
+  <%= f.date_select :date, order: [:day, :month, :year], min: Date.today %><br /><br />
+
+  <%= f.label :time %> :
   <%= f.time_select :time, ignore_date: :true, include_seconds: :true %>
   
   <br /><br />
