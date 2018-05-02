@@ -14,3 +14,10 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+//
+//
+= require jquery
+= require jquery.turbolinks
+= require jquery_ujs
+= require bootstrap/dropdown
+= require turbolinks
