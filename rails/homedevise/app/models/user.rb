@@ -7,4 +7,13 @@ class User < ApplicationRecord
 
   # attr_accessible :image, :remote_image_url
   mount_uploader :image, ImageUploader
+
+  # User Image Validation
+  validates_integrity_of  :image
+  validates_processing_of :image
+
+  # private
+  #   def avatar_size_validation
+  #     errors[:avatar] << "should be less than 500KB" if avatar.size > 0.5.megabytes
+  #   end
 end
