@@ -3,37 +3,30 @@ class Api::TodosController < ApplicationController
   # GET api/todos
   def index
     @todos = Todo.all
-    render json: @todos
+    render json: @todos, each_serializer: TodoSerializer
   end
 
   # GET api/todos/:id
   def show
-    render json: @todo    
-    # @todo = Todo.find(params[:id])
+    @todo = Todo.find(params[:id])
+    render json: @todo, serializer: TodoSerializer  
   end
-
-  # def new
-  #   @todo = Todo.new
-  # end
-
-  # def edit
-  #   @todo = Todo.find(params[:id])
-  # end
 
   # POST /todos
   def create
-    # debugger
     @todo = Todo.new(todo_params)
     if @todo.save
-      # 
-      @todo = JSONAPI::Serializer.serialize(@todo,{serializer: TodoSerializer})
-      # debugger
-      render json: { todo: @todo,status: 200}
-      # redirect_to @todo
+      render json: @todo, adapter: :json, status: 201
     else
-      # render "index"
-      render json: {message: "Please provide correct info",status: 400}
+      render json: { error: @todo.errors }, status: 400#422
     end
+    # if @todo.save
+    #   @todo = JSONAPI::Serializer.serialize(@todo,{serializer: TodoSerializer})
+    #   render json: { todo: @todo,status: 200}
+    # else
+    #   # render "index"
+    #   render json: {message: "Please provide correct info",status: 400}
+    # end
   end
 
   # PUT /todos/:id
