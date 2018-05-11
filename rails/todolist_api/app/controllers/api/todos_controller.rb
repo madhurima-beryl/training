@@ -29,23 +29,22 @@ class Api::TodosController < ApplicationController
     # end
   end
 
-  # PUT /todos/:id
+  #  PATCH/PUT api/todos/:id
   def update
     @todo = Todo.find(params[:id])
 
     if @todo.update(todo_params)
-      redirect_to @todo
+      render json: @todo, adapter: :json, status: 200
     else
-      render "index"
+      render json: { error: @todo.errors }, status: 400#422
     end
   end
 
-  # DELETE /todos/:id
+  # DELETE api/todos/:id
   def destroy
     @todo = Todo.find(params[:id])
     @todo.destroy
- 
-    redirect_to todos_path
+    head 204
   end
 
   private
