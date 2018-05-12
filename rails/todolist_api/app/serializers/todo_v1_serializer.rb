@@ -1,11 +1,14 @@
-class TodoSerializer < ActiveModel::Serializer
-  attributes :id, :title, :created_by
-  has_many :items
+# module V1
+  class TodoV1Serializer < ActiveModel::Serializer
+    attributes :id, :title, :created_by
+    has_many :items
 
-  def title
-     "I have to do the task #{object.title}"   
+    def title
+       "I have to do the task #{object.title}"   
+    end
   end
-end
+# end
+
 # require 'jsonapi-serializers'
 # class TodoSerializer
 #   include JSONAPI::Serializer

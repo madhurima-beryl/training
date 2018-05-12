@@ -1,15 +1,16 @@
-class Api::TodosController < ApplicationController
+class Api::V1::TodosController < ApplicationController
+    include ActiveModel::Serialization
 	
   # GET api/todos
   def index
     @todos = Todo.all
-    render json: @todos, each_serializer: TodoSerializer
+    render json: @todos, each_serializer: TodoV1Serializer
   end
 
   # GET api/todos/:id
   def show
     @todo = Todo.find(params[:id])
-    render json: @todo, serializer: TodoSerializer  
+    render json: @todo, serializer: TodoV1Serializer  
   end
 
   # POST /todos
