@@ -6,7 +6,7 @@ class ItemV2Serializer < ActiveModel::Serializer
       # object.todo.where(created_by: scope)
       {
         title: object.todo.title ,
-        assigned_by: object.todo.created_by
+        given_by: object.todo.created_by
       }
     end
   end

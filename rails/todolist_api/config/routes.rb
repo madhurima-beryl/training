@@ -1,7 +1,7 @@
-require 'constraints'
+require 'api_constraints'
 
 Rails.application.routes.draw do
-  root 'api/v1/todos#index'
+  root 'api/v2/todos#index'
   namespace :api do
   	scope module: :v1, constraints: ApiConstraints.new(version: 1) do
       resources :todos, :items
