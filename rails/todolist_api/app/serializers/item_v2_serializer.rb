@@ -6,7 +6,9 @@ class ItemV2Serializer < ActiveModel::Serializer
       # object.todo.where(created_by: scope)
       {
         title: object.todo.title ,
-        given_by: object.todo.created_by
+        given_by: object.todo.created_by,
+        sign: object.todo.signature
+
       }
     end
   end
