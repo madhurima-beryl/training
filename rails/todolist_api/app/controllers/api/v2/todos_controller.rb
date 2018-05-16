@@ -1,7 +1,5 @@
 class Api::V2::TodosController < ApplicationController
     include ActiveModel::Serialization
-    before_action :create => :generate_signature_image
-
 	
   # GET api/todos
   def index
@@ -17,7 +15,9 @@ class Api::V2::TodosController < ApplicationController
 
   # POST /todos
   def create
+    debugger
     @todo = Todo.new(todo_params)
+
     if @todo.save
       render json: @todo, adapter: :json, status: 201
     else
@@ -53,17 +53,7 @@ class Api::V2::TodosController < ApplicationController
   private
   def todo_params
     # params.permit(:title, :created_by)
-    params.require(:todo).permit(:title, :created_by, {signature: []})
-  end
-
-
-  def generate_signature_image
-    unless self.signature.nil?
-      instructions = JSON.load(self.signature).map { |h| "line #{h['mx']},#{h['my']} #{h['lx']},#{h['ly']}" } * ' '
-      path_signature_image="tmp/signature_image"+DateTime.now.to_s+".png"
-      system "convert -size 400x80 xc:transparent -stroke black -draw '#{instructions}' #{path_signature_image}"
-      self.signature_image = File.open(path_signature_image)
-    end
+    params.require(:todo).permit(:title, :created_by, :taskfile)
   end
 
 end

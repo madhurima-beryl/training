@@ -7,7 +7,7 @@ class ItemV2Serializer < ActiveModel::Serializer
       {
         title: object.todo.title ,
         given_by: object.todo.created_by,
-        sign: object.todo.signature
+        file: object.todo.taskfile
 
       }
     end

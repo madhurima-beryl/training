@@ -1,0 +1,5 @@
+ adding first line using writesecond line using puts
+hello
+how are you
+with do-end the file will close on its own
+thank you

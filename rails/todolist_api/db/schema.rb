@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2018_05_15_130541) do
     t.string "created_by"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "signature"
+    t.string "taskfile"
   end
 
   add_foreign_key "items", "todos"
