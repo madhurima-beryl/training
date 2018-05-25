@@ -1,5 +1,5 @@
 <%= form_for @doctor do |f| %>
-<!--   <%= label_tag(:q, "Name : ") %>-->
+<!--   <%#= label_tag(:q, "Name : ") %>-->
   <% if @doctor.errors.any? %>
     <div id="error_explanation">
       <h2>
@@ -20,7 +20,7 @@
   <%= f.text_field :ph_no %><br /><br />
   
   <%= f.label :specialization_id %>:
-  <!--   <%= f.text_field :specialization_id %><br /> -->
+  <!--   <%#= f.text_field :specialization_id %><br /> -->
   <%= f.collection_select( :specialization_id, Specialization.all.order(:id), :id, :name) %><br /><br />
 
   <%= f.label :salary %>:
@@ -33,6 +33,6 @@
  , url: {action: "create"}, html: {class: "nifty_form"} -->
 
 <!-- INDIVIDUAL ATTRIBUTE ERROR
-<% @doctor.errors[:name].each do |msg| %>
-          <li><%= msg %></li>
-<% end %> -->
+<%# @doctor.errors[:name].each do |msg| %>
+          <li><%#= msg %></li>
+<%# end %> -->
