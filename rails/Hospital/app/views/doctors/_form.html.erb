@@ -1,29 +1,32 @@
-<%= form_for @doctor do |f| %>
+<%= form_for @doctor, validate: true do |f| %>
 <!--   <%#= label_tag(:q, "Name : ") %>-->
-  <% if @doctor.errors.any? %>
+<!--   <%# if @doctor.errors.any? %>
     <div id="error_explanation">
       <h2>
-        <%= pluralize(@doctor.errors.count, "error") %> prohibited
+        <%#= pluralize(@doctor.errors.count, "error") %> prohibited
         this form from being saved:
       </h2>
       <ul>
-        <% @doctor.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
+        <%# @doctor.errors.full_messages.each do |msg| %>
+          <li><%#= msg %></li>
+        <%# end %>
       </ul>
     </div>
-  <% end %>
-  <%= f.label :name %>:
-  <%= f.text_field :name %><br /><br />
-
-  <%= f.label :ph_no %>:
-  <%= f.text_field :ph_no %><br /><br />
+  <%# end %> -->
+  <!-- <div class="form-group"> -->
   
-  <%= f.label :specialization_id %>:
+  <%= f.label "Name :" %>
+  <%= f.text_field :name %><br /><br />
+  <!-- </div> -->
+
+  <%= f.label "Ph No :" %>
+  <%= f.text_field :ph_no %><br /><br />
+
+  <%= f.label "Specialization Id :" %>
   <!--   <%#= f.text_field :specialization_id %><br /> -->
   <%= f.collection_select( :specialization_id, Specialization.all.order(:id), :id, :name) %><br /><br />
 
-  <%= f.label :salary %>:
+  <%= f.label "Salary :" %>
   <%= f.text_field :salary %><br /><br />
   
   <%= f.submit %> 
