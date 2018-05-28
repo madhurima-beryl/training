@@ -7,14 +7,14 @@
     <th>NAME</th>
     <th>PHONE NO</th>
     <th>SALARY</th>
-    <th>SPECIALIZATION ID</th>
+    <th>SPECIALIZATION</th>
   </tr>
   <tr align="center">
     <td><%= @doctor.id %></td>
     <td><%= @doctor.name %></td>
     <td><%= @doctor.ph_no %></td>
     <td><%= @doctor.salary %></td>
-    <td><%= @doctor.specialization_id %></td>
+    <td><%= @doctor.specialization.name %></td>
     <td><%= link_to 'edit', edit_doctor_path(@doctor) %></td>
     </tr>
 </table>

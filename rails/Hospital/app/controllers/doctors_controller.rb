@@ -1,6 +1,6 @@
 class DoctorsController < ApplicationController
   def index
-    @doctors = Doctor.all
+    @doctors = Doctor.all#.order("#{sort_column} #{sort_direction}")
   end
 
   def show
@@ -37,8 +37,9 @@ class DoctorsController < ApplicationController
   def destroy
     @doctor = Doctor.find(params[:id])
     @doctor.destroy
+    @doctors = Doctor.all
  
-    redirect_to doctors_path
+    #redirect_to doctors_path
   end
 
   def check_phone
@@ -53,4 +54,9 @@ class DoctorsController < ApplicationController
   def doctor_params
     params.require(:doctor).permit(:name, :ph_no, :specialization_id, :salary)
   end
+
+  def sortable_columns
+    ["name", ""]
+  end
+
 end

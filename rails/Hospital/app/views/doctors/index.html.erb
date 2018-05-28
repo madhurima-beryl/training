@@ -18,23 +18,15 @@
 <table border="2" cellpadding="10" cellspacing="5" width= "70%" >
   <tr align= "center">
     <th>ID</th>
-    <th>NAME</th>
+    <th>NAME <i class="fa fa-angle-down"></i>
+</th>
     <th>PHONE NO</th>
     <th>SALARY</th>
-    <th>SPECIALIZATION ID</th>
+    <th>SPECIALIZATION</th>
   </tr>
-  <% @doctors.each do |doctor| %>
-    <tr align="center">
-      <td><%= doctor.id %></td>
-      <td><%= doctor.name %></td>
-      <td><%= doctor.ph_no %></td>
-      <td><%= doctor.salary %></td>
-      <td><%= doctor.specialization_id %></td>
-      <td><%= link_to 'show', doctor_path(doctor.id) %></td>
-      <td><%= link_to 'Destroy', doctor_path(doctor.id), method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  <% end %>
+  <tbody id="doctors-list">
+    <%= render partial: 'doctors' %>
+  </tbody>
 </table>
 <%= link_to "Home", "homepage/index" %> 
 <%= link_to "New Doctor", "/doctors/new" %>

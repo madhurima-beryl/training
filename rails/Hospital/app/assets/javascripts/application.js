@@ -16,4 +16,3 @@
 //= require turbolinks
 //= require_tree .
 //= require jquery.validate
-= require jquery.validate.localization/messages_es //for i18n
