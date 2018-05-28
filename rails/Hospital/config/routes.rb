@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'homepage/index'
   root 'homepage#index'
   get 'doctors/main', to: 'doctors#main'
+  get 'doctors/check_phone', to: 'doctors#check_phone'
   get 'patients/main', to: 'patients#main'
   get 'appointments/main', to: 'appointments#main'
   get 'specializations/main', to: 'specializations#main'

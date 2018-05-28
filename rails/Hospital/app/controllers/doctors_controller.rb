@@ -41,6 +41,14 @@ class DoctorsController < ApplicationController
     redirect_to doctors_path
   end
 
+  def check_phone
+    @doctor = Doctor.find_by_ph_no(params[:doctor][:ph_no])
+    respond_to do |format|
+    format.json { render :json => !@doctor }
+  end
+
+  end
+
   private
   def doctor_params
     params.require(:doctor).permit(:name, :ph_no, :specialization_id, :salary)

@@ -11,10 +11,9 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
 //= require_tree .
 //= require jquery.validate
-//= require jquery.validate.localization/messages_es
+= require jquery.validate.localization/messages_es //for i18n
