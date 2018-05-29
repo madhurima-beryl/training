@@ -1,15 +1,22 @@
 class DoctorsController < ApplicationController
-  def index
-    case params[:id]
-    when "doctor-name-asc"
-      @doctors = Doctor.all.order("name")
-    when "doctor-name-desc"
-      @doctors = Doctor.all.order("name desc")
-    else
-      @doctors = Doctor.all.order("id")
-    end
+  # include DoctorsHelper   #makes the DoctorsHelper methods available to views for actions of the doctors controller.
+  helper_method :sort_column, :sort_direction   #Declare a controller method as a helper.
+                                                # The method helper_method is to explicitly share some methods defined in the controller to make them available for the view
 
-    #@doctors = Doctor.all.order("#{sort_column} #{sort_direction}")
+  def index
+    ##### HARDCODING SORTING ####### 
+    # case params[:id]
+    # when "doctor-name-asc"
+    #   @doctors = Doctor.all.order("name")
+    # when "doctor-name-desc"
+    #   @doctors = Doctor.all.order("name desc")
+    # else
+    #   @doctors = Doctor.all.order("id")
+    # end
+
+    ############# new way to access helpers' methods in controller ##########
+    # @doctors = Doctor.all.order("#{helpers.sort_column} #{helpers.sort_direction}")
+    @doctors = Doctor.all.order(sort_column + ' ' + sort_direction)
   end
 
   def show
@@ -69,7 +76,8 @@ class DoctorsController < ApplicationController
   end
 
   def sort_column
-    sortable_columns.include?(params[:column]) ? params[:column] : "name"
+    # sortable_columns.include?(params[:column]) ? params[:column] : "name"
+    Doctor.column_names.include?(params[:column]) ? params[:column] : "id"
   end
 
   def sort_direction

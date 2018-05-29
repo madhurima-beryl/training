@@ -4,18 +4,13 @@
 
 <table border="2" cellpadding="10" cellspacing="5" width= "70%" >
   <tr align= "center">
-    <th>ID</th>
-    <!-- <th>NAME <a href="#"><i class="fa fa-angle-down"></i></a></th> -->
-    <th>NAME 
-    <%= link_to '<i class="fa fa-angle-up"></i>'.html_safe, doctors_path( anchor: "", id: "doctor-name-asc")%>
-
-    <%= link_to '<i class="fa fa-angle-down"></i>'.html_safe, doctors_path( anchor: "", id: "doctor-name-desc") %>
-    </th>
-
-    <th>PHONE NO</th>
-    <th>SALARY</th>
-    <th>SPECIALIZATION</th>
+    <th><%= sort_link "id" %></th>
+    <th><%= sort_link "name" %></th>
+    <th><%= sort_link "ph_no", "Phone No" %></th>
+    <th><%= sort_link "salary" %></th>
+    <th><%= sort_link "specialzation_no", "Specialization" %></th>
   </tr>
+
   <tbody id="doctors-list">
     <%= render partial: 'doctors' %>
   </tbody>
@@ -26,3 +21,10 @@
 <%#= link_to "Home", homepage_index_path %> 
 <#%= link_to "New Doctor", new_doctor_path %>
 -->
+
+    <!-- <th>NAME <a href="#"><i class="fa fa-angle-down"></i></a></th> -->
+    <!-- <th>NAME  -->
+    <%#= link_to '<i class="fa fa-angle-up"></i>'.html_safe, doctors_path( anchor: "", id: "doctor-name-asc")%>
+
+    <%#= link_to '<i class="fa fa-angle-down"></i>'.html_safe, doctors_path( anchor: "", id: "doctor-name-desc") %>
+    <!-- </th> -->
