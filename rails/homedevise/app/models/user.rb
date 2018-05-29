@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :lockable, :timeoutable,
-        :omniauthable, omniauth_providers: [:facebook, :google_oauth2,]
+        :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
 
   def self.create_from_provider_data(provider_data)
     where(provider: provider_data.provider, uid: provider_data.uid).first_or_create do | user |
@@ -13,6 +13,9 @@ class User < ApplicationRecord
       user.skip_confirmation!
     end
   end
+
+  # validates_acceptance_of :t_o_c, :allow_nil => false, :accept => true, :on => :create
+
 
   # attr_accessible :image, :remote_image_url
   mount_uploader :image, ImageUploader

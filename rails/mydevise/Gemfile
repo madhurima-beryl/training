@@ -34,8 +34,12 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'devise'
-gem 'bootstrap-sass'
 gem 'jquery-turbolinks'
+gem 'bootstrap-sass', '~> 3.3.7'
+gem 'jquery-rails', '~> 4.3'
+gem 'omniauth-facebook'
+
+
 # gem 'delayed_job_active_record'
 gem "omniauth-google-oauth2"
 
