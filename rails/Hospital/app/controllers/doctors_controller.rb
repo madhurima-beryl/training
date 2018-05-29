@@ -1,6 +1,15 @@
 class DoctorsController < ApplicationController
   def index
-    @doctors = Doctor.all#.order("#{sort_column} #{sort_direction}")
+    case params[:id]
+    when "doctor-name-asc"
+      @doctors = Doctor.all.order("name")
+    when "doctor-name-desc"
+      @doctors = Doctor.all.order("name desc")
+    else
+      @doctors = Doctor.all.order("id")
+    end
+
+    #@doctors = Doctor.all.order("#{sort_column} #{sort_direction}")
   end
 
   def show
@@ -56,7 +65,15 @@ class DoctorsController < ApplicationController
   end
 
   def sortable_columns
-    ["name", ""]
+    ["name", "ph_no","specialization_id", "salary"]
+  end
+
+  def sort_column
+    sortable_columns.include?(params[:column]) ? params[:column] : "name"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
 end
