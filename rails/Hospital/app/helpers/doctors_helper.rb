@@ -1,12 +1,12 @@
 module DoctorsHelper
   def sort_link(column, title = nil)
-    # debugger
     #title || title = column.titleize
     title ||= column.titleize
     direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
     arrow = sort_direction == "asc" ? "fa fa-angle-up" : "fa fa-angle-down"
     icon = column == sort_column ? arrow : ""
-    link_to "#{title} <i class='#{icon}'></i>".html_safe, {column: column, direction: direction}
+    # debugger
+    link_to "#{title} <i class='#{icon}'></i>".html_safe, params.permit(:column, :direction).merge(column: column, direction: direction), remote: true
   end
 
   ########## IN CASE OF include DoctorsHelper IN CONTROLLER ############

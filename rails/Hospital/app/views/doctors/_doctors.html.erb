@@ -1,3 +1,4 @@
+<% debugger %>
 <% @doctors.each do |doctor| %>
     <tr align="center">
       <td><%= doctor.id %></td>
@@ -9,4 +10,4 @@
       <td><%= link_to 'Destroy', doctor_path(doctor.id), method: :delete,
               data: { confirm: 'Are you sure?' }, remote: true %></td>
     </tr>
-  <% end %>
+<% end %>

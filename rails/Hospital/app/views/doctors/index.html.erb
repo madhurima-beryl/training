@@ -2,18 +2,8 @@
 
 <h1>Doctors#index</h1>
 
-<table border="2" cellpadding="10" cellspacing="5" width= "70%" >
-  <tr align= "center">
-    <th><%= sort_link "id" %></th>
-    <th><%= sort_link "name" %></th>
-    <th><%= sort_link "ph_no", "Phone No" %></th>
-    <th><%= sort_link "salary" %></th>
-    <th><%= sort_link "specialzation_no", "Specialization" %></th>
-  </tr>
-
-  <tbody id="doctors-list">
-    <%= render partial: 'doctors' %>
-  </tbody>
+<table border="2" cellpadding="10" cellspacing="5" width= "70%" id="doctors-table" >
+  <%= render "index_partial" %>
 </table>
 <%= link_to "Home", "homepage/index" %> 
 <%= link_to "New Doctor", "/doctors/new" %>

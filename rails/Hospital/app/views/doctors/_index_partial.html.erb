@@ -1,0 +1,11 @@
+<% debugger %>
+<tr align= "center">
+  <th><%= sort_link "id" %></th>
+  <th><%= sort_link "name" %></th>
+  <th><%= sort_link "ph_no", "Phone No" %></th>
+  <th><%= sort_link "salary" %></th>
+  <th><%= sort_link "specialization_no", "Specialization" %></th>
+</tr>
+<tbody id="doctors-list">
+    <%= render partial: 'doctors' %>
+</tbody>
