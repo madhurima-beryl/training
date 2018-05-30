@@ -16,3 +16,4 @@
 //= require turbolinks
 //= require_tree .
 //= require jquery.validate
+//= require doctor_table
