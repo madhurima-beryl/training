@@ -24,12 +24,17 @@ class DoctorsController < ApplicationController
       when "doctor-salary-desc"
         @doctors = Doctor.search(params[:search]).order("salary desc").paginate(:per_page => 5, :page => params[:page])
       when "doctor-spcl-asc"
-        @doctors = Doctor.search(params[:search]).order("specialization_id").paginate(:per_page => 5, :page => params[:page])
-        # name = Specialization.joins(:doctors).map(&:name, &:id).sort
-        # @doctors = Doctor.all
+        # Doctor.joins(:specialization).where( specializations: {name: "heart"})        //selecting with a paticular spcl_name----using hash
+        # Doctor.joins(:specialization).where( "specializations.name" =>  "heart")      //selecting with a paticular spcl_name----using string
+        # sp_name = Specialization.joins(:doctors).map(&:name).sort                     //generates a sorted array of spcl_name present inside table 
+        # Doctor.joins(:specialization).where( specializations: {name: sp_name})        //selecting-----using array
+        # Doctor.joins(:specialization).where( specializations: {name: params[:specialization_name]})   //via parameter passing
+
+        ###### sorting by specialization_name and doctor_id ######
+        @doctors = Doctor.joins(:specialization).order("specializations.name","id").paginate(:per_page => 5, :page => params[:page])
       when "doctor-spcl-desc"
-        @doctors = Doctor.search(params[:search]).order("specialization_id desc").paginate(:per_page => 5, :page => params[:page])
-        # name = Specialization.joins(:doctors).map(&:name).sort.reverse
+        @doctors = Doctor.joins(:specialization).order("specializations.name DESC", "id").paginate(:per_page => 5, :page => params[:page])
+        # name = Specialization.joins(:doctors).map(&:name).sort.reverse                //reverse sort
       else
         @doctors = Doctor.search(params[:search]).order("id").paginate(:per_page => 5, :page => params[:page])
     end
