@@ -1,13 +1,15 @@
 <% debugger %>
-<% @doctors.each do |doctor| %>
-    <tr align="center">
-      <td><%= doctor.id %></td>
-      <td><%= doctor.name %></td>
-      <td><%= doctor.ph_no %></td>
-      <td><%= doctor.salary %></td>
-      <td><%= doctor.specialization.name %></td>
-      <td><%= link_to 'show', doctor_path(doctor.id) %></td>
-      <td><%= link_to 'Destroy', doctor_path(doctor.id), method: :delete,
-              data: { confirm: 'Are you sure?' }, remote: true %></td>
-    </tr>
-<% end %>
+<tbody id="doctors-list">
+  <% @doctors.each do |doctor| %>
+      <tr align="center">
+        <td><%= doctor.id %></td>
+        <td><%= doctor.name %></td>
+        <td><%= doctor.ph_no %></td>
+        <td><%= doctor.salary %></td>
+        <td><%= doctor.specialization.name %></td>
+        <td><%= link_to 'show', doctor_path(doctor.id) %></td>
+        <td><%= link_to 'Destroy', doctor_path(doctor.id), method: :delete,
+                data: { confirm: 'Are you sure?' }, remote: true %></td>
+      </tr>
+  <% end %>
+</tbody>

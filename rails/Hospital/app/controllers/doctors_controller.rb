@@ -4,19 +4,41 @@ class DoctorsController < ApplicationController
                                                 # The method helper_method is to explicitly share some methods defined in the controller to make them available for the view
 
   def index
+    # debugger
     ##### HARDCODING SORTING ####### 
-    # case params[:id]
-    # when "doctor-name-asc"
-    #   @doctors = Doctor.all.order("name")
-    # when "doctor-name-desc"
-    #   @doctors = Doctor.all.order("name desc")
-    # else
-    #   @doctors = Doctor.all.order("id")
-    # end
+    case params[:id]
+      when "doctor-id-asc"
+        @doctors = Doctor.search(params[:search]).order("id").paginate(:per_page => 5, :page => params[:page])
+      when "doctor-id-desc"
+        @doctors = Doctor.search(params[:search]).order("id desc").paginate(:per_page => 5, :page => params[:page])
+      when "doctor-name-asc"
+        @doctors = Doctor.search(params[:search]).order("name").paginate(:per_page => 5, :page => params[:page])
+      when "doctor-name-desc"
+        @doctors = Doctor.search(params[:search]).order("name desc").paginate(:per_page => 5, :page => params[:page])
+      when "doctor-ph-asc"
+        @doctors = Doctor.search(params[:search]).order("ph_no").paginate(:per_page => 5, :page => params[:page])
+      when "doctor-ph-desc"
+        @doctors = Doctor.search(params[:search]).order("ph_no desc").paginate(:per_page => 5, :page => params[:page])
+      when "doctor-salary-asc"
+        @doctors = Doctor.search(params[:search]).order("salary").paginate(:per_page => 5, :page => params[:page])
+      when "doctor-salary-desc"
+        @doctors = Doctor.search(params[:search]).order("salary desc").paginate(:per_page => 5, :page => params[:page])
+      when "doctor-spcl-asc"
+        @doctors = Doctor.search(params[:search]).order("specialization_id").paginate(:per_page => 5, :page => params[:page])
+        # name = Specialization.joins(:doctors).map(&:name, &:id).sort
+        # @doctors = Doctor.all
+      when "doctor-spcl-desc"
+        @doctors = Doctor.search(params[:search]).order("specialization_id desc").paginate(:per_page => 5, :page => params[:page])
+        # name = Specialization.joins(:doctors).map(&:name).sort.reverse
+      else
+        @doctors = Doctor.search(params[:search]).order("id").paginate(:per_page => 5, :page => params[:page])
+    end
 
     ############# new way to access helpers' methods in controller ##########
     # @doctors = Doctor.all.order("#{helpers.sort_column} #{helpers.sort_direction}")
-    @doctors = Doctor.all.order(sort_column + ' ' + sort_direction)
+    
+    ############# using loose coupling  ################
+    # @doctors = Doctor.all.order(sort_column + ' ' + sort_direction)
   end
 
   def show

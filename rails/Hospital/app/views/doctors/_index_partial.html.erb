@@ -1,11 +1,48 @@
-<% debugger %>
-<tr align= "center">
-  <th><%= sort_link "id" %></th>
-  <th><%= sort_link "name" %></th>
-  <th><%= sort_link "ph_no", "Phone No" %></th>
-  <th><%= sort_link "salary" %></th>
-  <th><%= sort_link "specialization_no", "Specialization" %></th>
-</tr>
-<tbody id="doctors-list">
-    <%= render partial: 'doctors' %>
-</tbody>
+<%# debugger %>
+<table border="2" cellpadding="10" cellspacing="5" width= "70%" id="doctors-table" >
+  <tr align= "center">
+    <th>ID 
+          <%= link_to '<i class="fa fa-angle-up"></i>'.html_safe, doctors_path( anchor: "", id: "doctor-id-asc"), remote: true%>
+          <%= link_to '<i class="fa fa-angle-down"></i>'.html_safe, doctors_path( anchor: "", id: "doctor-id-desc"), remote: true%>
+    </th>
+    <th>NAME 
+          <%= link_to '<i class="fa fa-angle-up"></i>'.html_safe, doctors_path( anchor: "", id: "doctor-name-asc"), remote: true%>
+          <%= link_to '<i class="fa fa-angle-down"></i>'.html_safe, doctors_path( anchor: "", id: "doctor-name-desc"), remote: true%>
+    </th>
+    <th>PHONE NO
+          <%= link_to '<i class="fa fa-angle-up"></i>'.html_safe, doctors_path( anchor: "", id: "doctor-ph-asc"), remote: true%>
+          <%= link_to '<i class="fa fa-angle-down"></i>'.html_safe, doctors_path( anchor: "", id: "doctor-ph-desc"), remote: true%>
+    </th>
+    <th>SALARY 
+          <%= link_to '<i class="fa fa-angle-up"></i>'.html_safe, doctors_path( anchor: "", id: "doctor-salary-asc"), remote: true%>
+          <%= link_to '<i class="fa fa-angle-down"></i>'.html_safe, doctors_path( anchor: "", id: "doctor-salary-desc"), remote: true%>
+    </th>
+    
+    <th>SPECIALIZATION
+          <%= link_to '<i class="fa fa-angle-up"></i>'.html_safe, doctors_path( anchor: "", id: "doctor-spcl-asc"), remote: true%>
+          <%= link_to '<i class="fa fa-angle-down"></i>'.html_safe, doctors_path( anchor: "", id: "doctor-spcl-desc"), remote: true%>
+    </th>
+    <!-- <th><%#= sort_link "id" %></th>
+    <th><%#= sort_link "name" %></th>
+    <th><%#= sort_link "ph_no", "Phone No" %></th>
+    <th><%#= sort_link "salary" %></th>
+    <th><%#= sort_link "specialization_no", "Specialization" %></th> -->
+  </tr>
+  <div id="records-body">
+    <tbody id="doctors-list">
+      <% @doctors.each do |doctor| %>
+          <tr align="center">
+            <td><%= doctor.id %></td>
+            <td><%= doctor.name %></td>
+            <td><%= doctor.ph_no %></td>
+            <td><%= doctor.salary %></td>
+            <td><%= doctor.specialization.name %></td>
+            <td><%= link_to 'show', doctor_path(doctor.id) %></td>
+            <td><%= link_to 'Destroy', doctor_path(doctor.id), method: :delete,
+                    data: { confirm: 'Are you sure?' }, remote: true %></td>
+          </tr>
+      <% end %>
+    </tbody>
+  </div>
+</table>
+</br><%= will_paginate @doctors %></br>

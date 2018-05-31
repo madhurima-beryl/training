@@ -2,9 +2,19 @@
 
 <h1>Doctors#index</h1>
 
-<table border="2" cellpadding="10" cellspacing="5" width= "70%" id="doctors-table" >
-  <%= render "index_partial" %>
-</table>
+<%= form_tag doctors_path, :method => 'get', :id => "doctors-search" do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search By Name", :name => nil %>
+  </p>
+
+  <div id="records">
+  <table border="2" cellpadding="10" cellspacing="5" width= "70%" id="doctors-table" >
+    <%= render "index_partial" %>
+  </table>
+  </div>
+<% end %>
+
 <%= link_to "Home", "homepage/index" %> 
 <%= link_to "New Doctor", "/doctors/new" %>
 <!--
