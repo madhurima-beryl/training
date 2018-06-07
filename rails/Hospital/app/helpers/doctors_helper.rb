@@ -6,7 +6,7 @@ module DoctorsHelper
     arrow = sort_direction == "asc" ? "fa fa-angle-up" : "fa fa-angle-down"
     icon = column == sort_column ? arrow : ""
     # debugger
-    link_to "#{title} <i class='#{icon}'></i>".html_safe, params.permit(:column, :direction).merge(column: column, direction: direction), remote: true
+    link_to "#{title} <i class='#{icon}'></i>".html_safe, params.permit(:column, :direction, :page).merge(column: column, direction: direction, :page => nil), remote: true
   end
 
   ########## IN CASE OF include DoctorsHelper IN CONTROLLER ############
