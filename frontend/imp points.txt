@@ -8,4 +8,12 @@ CSS has an import option that lets you split your CSS into smaller, more maintai
 
 https://medium.freecodecamp.org/add-bootstrap-to-your-ruby-on-rails-project-8d76d70d0e3b
 
+************About application.html.erb**********************************
 
+In the <head> … </head> section we can discover the page title tag, and two other elements of interest: stylesheet_link_tag and javascript_include_tag are two “Asset Tag Helpers”. Note that in total 6 asset tag helpers exist in Rails, they exist to generate HTML that link views to feeds, JavaScript, stylesheets, images, videos and audios.
+auto_discovery_link_tag
+javascript_include_tag
+stylesheet_link_tag
+image_tag
+video_tag
+audio_tag
