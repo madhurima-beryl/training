@@ -48,6 +48,7 @@ class DoctorsController < ApplicationController
     else
       @doctors = Doctor.search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(:per_page => 5, :page => params[:page])
     end
+    @doc = Doctor.all
   end
 
   def show
