@@ -40,7 +40,12 @@
 <div id= "doctor-container" style="width:1200px; height:400px;">
 
 </div>
-  <%= Doctor.group_by_day(:created_at).count %>
+<%= @array %>
+  <%#= @doc.group_by_day(:created_at).count %>
+<!-- <br /><br /><br />
+  <%#= @doc.group(:created_at).count.to_a %> -->
+
+
 <!-- Scripts -->
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script>
@@ -92,14 +97,31 @@
       },
       series: [{
           name: 'Jane',
+          // pointStart: Date.UTC(2007, 10, 1),
+          // pointInterval: 24 * 3600 * 1000, 
+          // pointIntervalUnit: 'month',
           // data: [[19,6], [44,1], [12,0], [23,4]]  //for [x,y]
-          data: [19.6, 44.1, 12.0,{ y: 21.4, color: '#BF0B23'}, 23.4]
-      }]
+          // data: [19.6, 44.1, 12.0,{ y: 21.4, color: '#BF0B23'}, 23.4]
+          data: [
+            [Date.UTC(2017, 10, 25), 0],
+            [Date.UTC(2017, 11,  6), 0.25],
+            [Date.UTC(2017, 11, 20), 1.41],
+            [Date.UTC(2017, 11, 25), 1.64],
+            [Date.UTC(2018, 0,  4), 1.6],
+            [Date.UTC(2018, 0, 17), 2.55]
+            ]
+      }],
+      xAxis: {
+        type: 'datetime',
+        dateTimeLabelFormats: {
+            day: '%e %b %Y'
+        }
+      }
   };
 </script>
 
 <script type="text/javascript">  
-  var array = <%= @doc.inspect.html_safe %>;
+  // var array = <%#= @doc.inspect.html_safe %>;
   $(document).ready(function() {
     var doctorChart = new Highcharts.Chart('doctor-container',{
       chart: {
@@ -116,8 +138,11 @@
         // type: 'linear'
       },
       series: [{
-        data: <%= @doc.group_by_day(:created_at, format: "%d %b").count.to_a %>
-        // data: <%= @doc.map { |doc| [doc.created_at] } %>
+        // keys: ['', 'x', 'y'],
+        // data: [[27 May 2018, 2], [28 May 2018, 1], [29 May 2018, 1], [30 May 2018, 1], [31 May 2018, 1], [01 Jun 2018, 1]]
+        data: <%= @array %>
+        // data: <%#= @doc.group_by_day(:created_at, format: "%d %b").count.to_a %>
+        // data: <%#= @doc.map { |doc| [doc.created_at] } %>
       }]
     });
   });
@@ -130,3 +155,8 @@
 @doctors.each do |doc|
                 .group_by_day(:created_at).count
               end -->
+
+<!-- (3).downto(1) do |i|
+  @doc.where( 'created_at >= ? and created_at<= ?', i.month.ago, (i-1).month.ago).count
+end -->
+

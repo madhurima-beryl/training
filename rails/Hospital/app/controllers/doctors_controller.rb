@@ -48,7 +48,12 @@ class DoctorsController < ApplicationController
     else
       @doctors = Doctor.search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(:per_page => 5, :page => params[:page])
     end
-    @doc = Doctor.all
+    doc = Doctor.all
+    array = []
+    doc.group_by_day(:created_at).count.each do |k,v|
+      array<< [k.to_time.to_i*1000,v]
+    end
+    @array = array
   end
 
   def show
