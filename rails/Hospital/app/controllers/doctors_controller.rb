@@ -49,11 +49,17 @@ class DoctorsController < ApplicationController
       @doctors = Doctor.search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(:per_page => 5, :page => params[:page])
     end
     doc = Doctor.all
-    array = []
+    count_array = salary_array = []
     doc.group_by_day(:created_at).count.each do |k,v|
-      array<< [k.to_time.to_i*1000,v]
+      count_array << [k.to_time.to_i*1000,v]
     end
-    @array = array
+    @count_array = count_array
+
+    doc.order(:created_at).group_by(&:created_at).each do |k,v|
+      # salary_array << [k.to_time.to_i*1000,v[1][0].salary]
+      salary_array << v[1][0].salary
+    end
+    @salary_array = salary_array 
   end
 
   def show

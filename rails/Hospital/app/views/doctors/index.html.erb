@@ -125,7 +125,7 @@
   $(document).ready(function() {
     var doctorChart = new Highcharts.Chart('doctor-container',{
       chart: {
-        type: 'column'
+        // type: 'column'
       },
       title: {
         text: 'Doctors List'
@@ -134,15 +134,32 @@
         type: 'datetime'
         // categories: Doctor.group_by_day(:created_at).count
       },
-      yAxis: {
+      yAxis: [{ //--- Primary yAxis
         // type: 'linear'
-      },
+        title: {
+          text: 'No. of Doctors'
+        }, { //--- Secondary yAxis
+        title: {
+          text: 'Salary'
+        },
+        opposite: true
+      }],
+      
       series: [{
+        name: "no. of doctors joined",
+        type: 'column',
         // keys: ['', 'x', 'y'],
         // data: [[27 May 2018, 2], [28 May 2018, 1], [29 May 2018, 1], [30 May 2018, 1], [31 May 2018, 1], [01 Jun 2018, 1]]
-        data: <%= @array %>
+        data: <%= @count_array %>
         // data: <%#= @doc.group_by_day(:created_at, format: "%d %b").count.to_a %>
         // data: <%#= @doc.map { |doc| [doc.created_at] } %>
+      }, {
+        name: 'Salary',
+        type: 'spline',
+        yAxis: 1,
+        data: <%= @salary_array %>
+        // tooltip: {
+      }
       }]
     });
   });
@@ -160,3 +177,20 @@
   @doc.where( 'created_at >= ? and created_at<= ?', i.month.ago, (i-1).month.ago).count
 end -->
 
+series: [{
+        name: 'Rainfall',
+        type: 'column',
+        yAxis: 1,
+        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+        tooltip: {
+            valueSuffix: ' mm'
+        }
+
+    }, {
+        name: 'Temperature',
+        type: 'spline',
+        data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
+        tooltip: {
+            valueSuffix: '°C'
+        }
+    }]
